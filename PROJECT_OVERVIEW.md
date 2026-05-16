@@ -12,6 +12,7 @@
 | `POLICY_AI_ACCEPTABLE_USE.md` | Phase 1 deliverable: full AI use policy (permitted/prohibited services, gatekeeper, agentic AI, incidents, sanctions) |
 | `POLICY_SUITE.md` | Phase 1 deliverable: template outlines for access control, data handling, incident response, sanctions, workforce security, media disposal policies |
 | `NISTDocs.md` | Reference guide: NIST publications relevant to HIPAA and CUI compliance with canonical URLs |
+| `SYNTHETIC_DATA.md` | Synthetic data overview: dataset descriptions (PD0–PD3), formats, examples, and visualizations |
 | `ORGANIZATIONAL_STRUCTURE.md` | Organizational roles, responsibilities, and reporting relationships |
 | `KNOWLEDGE_CHECKS.md` | Learning verification questions for team training |
 
