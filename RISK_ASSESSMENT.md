@@ -77,7 +77,7 @@ UW Clinical DB → (TLS) → S3 Landing Zone → Validation → S3 Validated
 
 ### Scoring Methodology (NIST SP 800-30 aligned)
 
-**Likelihood:** How probable is this scenario given our controls?
+**Likelihood:** How probable is this scenario given the project's controls?
 | Score | Level | Meaning |
 |-------|-------|---------|
 | 1 | Very Low | Unlikely given current controls |

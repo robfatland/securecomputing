@@ -259,7 +259,7 @@ All approved AI services are reviewed annually:
 - Is the BAA still in effect?
 - Has the provider changed their data handling policies?
 - Is the no-training guarantee still valid?
-- Are there new services that better meet our needs?
+- Are there new services that better meet the project's needs?
 
 ---
 

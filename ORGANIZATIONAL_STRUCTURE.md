@@ -1,5 +1,7 @@
 # Organizational Structure: Large R1 University Medical Research Environment
 
+> ⚠️ **NOTE:** This document describes a *generic* organizational model for a large R1 university. The project-specific team composition, role assignments, and access levels are defined in `PHASE0_CHARTER.md` and `PROJECT_OVERVIEW.md` (Project Scenario Summary). Key differences from this generic model: (1) the Co-PI at FH has full PHI access within the UW environment (not de-identified only), (2) the 7-person team maps to a subset of the roles described here, (3) there is no Department Chair or Compliance Officer in the project team — the PI fills the Privacy Officer role. Use this document for understanding the broader institutional context; use the charter for project-specific role definitions.
+
 ## Context
 
 Large R1 University with a Medical Department that collects clinical data. Research teams conduct clinical research using this data, including external collaborators at non-University medical facilities.
@@ -233,9 +235,4 @@ Analysis / Publication
 
 ---
 
-## Next Steps
-
-1. Map these organizational roles to AWS IAM entities and access patterns
-2. Define data flow architecture in AWS
-3. Create technical access control policies
-4. Design audit and logging mechanisms
+*For the project-specific implementation of these roles, see `PHASE0_CHARTER.md` Section 4 and `ARCHITECTURE.md` → IAM Architecture.*

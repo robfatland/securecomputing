@@ -1,4 +1,6 @@
-# Project1: Synthetic PHI Environment on AWS
+# Synthetic PHI Environment on AWS for Clinical Research (SPEACR)
+
+> **PDF generation:** `pandoc --toc --toc-depth=2 -V geometry:margin=1in --pdf-engine=xelatex PROJECT_OVERVIEW.md ARCHITECTURE.md GATES.md PHASE0_CHARTER.md RISK_ASSESSMENT.md POLICY_AI_ACCEPTABLE_USE.md POLICY_SUITE.md SYNTHETIC_DATA.md NISTDocs.md ORGANIZATIONAL_STRUCTURE.md KNOWLEDGE_CHECKS.md -o SecureComputing_Book.pdf` — see `README.md` for install instructions.
 
 ## Project Documents
 
@@ -16,7 +18,7 @@
 | `ORGANIZATIONAL_STRUCTURE.md` | Organizational roles, responsibilities, and reporting relationships |
 | `KNOWLEDGE_CHECKS.md` | Learning verification questions for team training |
 
-### Related Repositories
+### Constituent Repositories
 
 | Repository | Purpose | Relationship |
 |------------|---------|--------------|
@@ -84,6 +86,7 @@ The purpose of this project is to document a functional synthetic research compu
 | **FH** | A nominal designator for a hypothetical collaborator's healthcare facility; a Co-PI institution. |
 | **PI** | Principal Investigator — the lead researcher on the project; holds the NIH award; serves as project sponsor, Privacy Officer, and risk acceptor. |
 | **SCP** | Service Control Policy — an AWS Organizations policy that sets permission guardrails on member accounts. SCPs define the *maximum* permissions available in an account; they cannot grant permissions, only restrict them. Applied by the Management account and inherited by all member accounts in the Organization. |
+| **Key Policy** | A resource-based policy attached to a KMS encryption key that defines who can use the key for encryption, decryption, and administration. Key policies are *independent of* IAM policies — both must allow an action for it to succeed. This is how the project enforces separation of duties: even if an IAM policy grants broad S3 access, the key policy can deny decrypt permission, making the data unreadable. Key policies are the mechanism that prevents IT Staff from reading PHI despite having infrastructure admin access. |
 
 ### Technical Terms
 
@@ -117,7 +120,7 @@ The purpose of this project is to document a functional synthetic research compu
 | **IaC** | Infrastructure as Code — the practice of defining cloud infrastructure in version-controlled template files (Terraform, CloudFormation) rather than configuring manually. Enables reproducibility, auditability, and drift detection. |
 | **OIDC** | OpenID Connect — an identity layer built on OAuth 2.0. Used for GitHub Actions to authenticate to AWS without storing long-lived credentials (GitHub's OIDC provider issues short-lived tokens that AWS IAM trusts). |
 | **DLP** | Data Loss Prevention — controls and monitoring designed to detect and prevent unauthorized data exfiltration. In this project: network egress restrictions, clipboard controls, and Macie scanning. |
-| **Gatekeeper** | A technical control preventing inadvertent PHI disclosure to AI services. In our example system this component is based upon the AWS Comprehend Medical service used to scan AI prompts for PHI before forwarding them to the AWS Bedrock Foundation Model API service. Implemented as a Lambda function or sidecar process. |
+| **Gatekeeper** | A technical control preventing inadvertent PHI disclosure to AI services. In this example system the component is based upon the AWS Comprehend Medical service used to scan AI prompts for PHI before forwarding them to the AWS Bedrock Foundation Model API service. Implemented as a Lambda function or sidecar process. |
 | **GitHub** | External source code repository (not an AWS service). Used for version control of code, IaC, and documentation. Outside the compliance perimeter — no PHI permitted. |
 | **CI/CD** | Continuous Integration / Continuous Deployment — automated pipelines that build, test, and deploy code. (CI/CD not to be confused with CI = Computing Infrastructure.) |
 | **GitHub Actions** | CI/CD automation service within GitHub. Builds containers, runs tests, deploys to AWS. Uses OIDC federation for AWS credentials. |
@@ -164,7 +167,7 @@ The Security Rule breaks down as:
 - **Physical Safeguards** (~20%): Facility access controls, workstation security, equipment management
 - **Technical Safeguards** (~20%): Encryption, access controls, audit logging, intrusion detection
 
-### Why This Matters for Our Project
+### Why This Matters for This Project
 
 Real-world breaches are more often caused by:
 - Missing or inadequate policies and procedures
@@ -176,7 +179,7 @@ Real-world breaches are more often caused by:
 
 than by technical vulnerabilities.
 
-**Our approach will integrate both**:
+**This project's approach integrates both**:
 - Properly configured AWS technical infrastructure
 - Documented organizational policies and procedures
 - Defined roles with clear responsibilities
@@ -315,7 +318,7 @@ than by technical vulnerabilities.
 - Used as template for security policy development
 - Common reference in compliance audits
 
-### Key NIST Principles Reflected in Our Architecture
+### Key NIST Principles Reflected in the Architecture
 
 | NIST Principle | How It's Implemented in Project |
 |---|---|
@@ -404,17 +407,6 @@ This environment will encompass:
 - Data integrity controls
 - Intrusion detection and prevention
 - Compliance validation mechanisms
-
-## Next Steps
-
-1. **Define Organizational Structure** - Roles, responsibilities, governance model
-2. **Map Compliance Requirements** - HIPAA Privacy Rule, Security Rule, NIST alignment
-3. **Design AWS Technical Architecture** - Services, topology, security controls
-4. **Create Policy Framework** - Access controls, data handling, incident response
-5. **Implement Infrastructure** - Build AWS environment with documented controls
-6. **Develop Audit & Monitoring** - Logging, alerting, compliance verification
-7. **Create Training Materials** - Workforce education on HIPAA and procedures
-8. **Document Everything** - Risk assessments, control mappings, compliance evidence
 
 ---
 
@@ -618,7 +610,7 @@ This framework tracks the wall-clock progression of a PHI-focused research proje
 - Incident response drill after-action report
 - System authorization memo (signed by compliance officer)
 
-**Exit Gate (G6):** Compliance officer reviews all evidence and formally authorizes the system for use with PHI (synthetic in our case). All critical findings from testing remediated.
+**Exit Gate (G6):** Compliance officer reviews all evidence and formally authorizes the system for use with PHI (synthetic in this case). All critical findings from testing remediated.
 
 ---
 
@@ -698,16 +690,7 @@ This framework tracks the wall-clock progression of a PHI-focused research proje
 
 ### Gate Checkpoints
 
-Gates enforce that organizational prerequisites are met before technical work proceeds:
-
-| Gate | Requirement | Blocks |
-|------|-------------|--------|
-| **G1** | Project charter signed, roles assigned | All subsequent work |
-| **G2** | Risk assessment documented and accepted | Infrastructure provisioning |
-| **G3** | All personnel HIPAA-trained (documented) | Any access to PHI (even synthetic) |
-| **G4** | BAAs executed with all third parties | Third-party integrations |
-| **G5** | Infrastructure security validated | Data loading and access provisioning |
-| **G6** | Compliance officer authorizes system | Active research use |
+Gates enforce that organizational prerequisites are met before technical work proceeds. See `GATES.md` for full gate definitions, evidence requirements, and sequencing.
 
 ### Day Sequence (to be elaborated)
 
@@ -927,3 +910,4 @@ The BAA does not make AWS services automatically compliant. It means:
 - [ ] **Book assembly:** Evaluate tooling for stapling project Markdown files into a single document (PDF or HTML book). See note in PO.md.
 - [x] **Split PO.md** → `ARCHITECTURE.md` created ✓
 - [ ] **Reproducibility / "How to Construct":** AI-guided build from this repo's documentation
+- [ ] **Synthea Docker image:** Build a Synthea CSV-export Docker image (Java 17 + Synthea + CSV-configured properties) and push to Docker Hub with discoverable tags. Eliminates the Java/Gradle/WSL installation challenges for future users. Should also include the ETL-Synthea-Python tool with pandas 2.x compatibility patches pre-applied (the upstream repo uses deprecated `DataFrame.append()` which fails on modern pandas).

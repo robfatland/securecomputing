@@ -2,7 +2,7 @@
 
 This document contains a series of knowledge checks organized by topic. Some have been answered, others are pending your review and responses.
 
-**Instructions**: Read all three architecture documents carefully (PROJECT_OVERVIEW.md, ORGANIZATIONAL_STRUCTURE.md, AWS_TECHNICAL_ARCHITECTURE.md) before answering the pending questions. This ensures you have context and understand the integrated design.
+**Instructions**: Read the project architecture documents carefully (PROJECT_OVERVIEW.md, ORGANIZATIONAL_STRUCTURE.md, ARCHITECTURE.md) before answering the pending questions. This ensures you have context and understand the integrated design.
 
 ---
 
@@ -61,7 +61,7 @@ KMS Decrypt Call               Audit log: "Lambda service decrypted cohort-anest
 
 **Hints to consider:**
 - The analyst has an IAM role and database permissions, but what database view were they granted?
-- Refer to: AWS_TECHNICAL_ARCHITECTURE.md → "Step 4: Medical IT Provisions Access"
+- Refer to: ARCHITECTURE.md → IAM Architecture and Access Control sections
 - What columns are included in the view? What rows can the view access?
 - When a query fails, what systems log this attempt?
 
@@ -111,7 +111,7 @@ This query fails at the database layer because:
 
 **Hints to consider:**
 - What is HIPAA's definition of "de-identified" data?
-- Refer to: AWS_TECHNICAL_ARCHITECTURE.md → "Pattern 3: External Data Sharing"
+- Refer to: ARCHITECTURE.md → "Raw PHI Upload Path Security" and Data Storage Architecture
 - What is an MRN, and why can it be used to re-identify patients?
 - What's the difference between de-identification and pseudonymization/coding?
 - Review: ORGANIZATIONAL_STRUCTURE.md → "Minimum Necessary Principle"
@@ -173,7 +173,7 @@ Including MRN as a "code" is a HIPAA violation because:
 **Status:** PENDING YOUR ANSWER
 
 **Hints to consider:**
-- Refer to: AWS_TECHNICAL_ARCHITECTURE.md → "Access Request & Approval Workflow"
+- Refer to: ARCHITECTURE.md → IAM Architecture → "Access Provisioning Workflow"
 - Why does access expire at all? What's the compliance reason?
 - Who approves the renewal request?
 - What checks are performed during renewal?
@@ -302,7 +302,7 @@ When the PI's access expires after 90 days:
      - **Respond**: Take action on incidents
      - **Recover**: Restore from incidents
    
-2. **NIST SP 800-66 Rev. 1: "An Introductory Resource Guide for Implementing the HIPAA Security Rule"**
+2. **NIST SP 800-66 Rev. 2: "Implementing the HIPAA Security Rule: A Cybersecurity Resource Guide"**
    - Directly maps NIST guidance to HIPAA Security Rule requirements
    - Provides implementation guidance for:
      - Administrative Safeguards
@@ -314,7 +314,7 @@ When the PI's access expires after 90 days:
    - Used to build compliance frameworks
    - Many controls map directly to HIPAA requirements
 
-4. **Key NIST Principles Aligned with Our Architecture**:
+4. **Key NIST Principles Aligned with the Architecture**:
    - **Defense in Depth**: Multiple layers of security (network, application, database, encryption)
    - **Least Privilege**: Users have minimum necessary access
    - **Separation of Duties**: Checks and balances prevent single person from compromising system
@@ -359,6 +359,150 @@ When the PI's access expires after 90 days:
 
 ## Document References
 
-- [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) - Project goals and high-level approach
+- [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) - Project goals, glossary, HIPAA/NIST framework, phases
 - [ORGANIZATIONAL_STRUCTURE.md](ORGANIZATIONAL_STRUCTURE.md) - Roles, responsibilities, access control matrix
-- [AWS_TECHNICAL_ARCHITECTURE.md](AWS_TECHNICAL_ARCHITECTURE.md) - AWS services, IAM roles, encryption, audit trails
+- [ARCHITECTURE.md](ARCHITECTURE.md) - AWS services, IAM roles, encryption, network, audit trails
+
+---
+
+## Section 6: Comprehension Check — System Design and Compliance
+
+### Easy (Recall)
+
+#### Question 6.1: Blank Slate Rule
+**Q: What does the Blank Slate Rule guarantee about the CDK infrastructure?**
+
+**A:** The same CDK code that deploys the infrastructure must also be able to cleanly destroy it — returning the AWS accounts to an empty state with no orphaned resources and no zombie spend. `cdk destroy` uses the same stack definitions as `cdk deploy`. If CDK didn't create it, it shouldn't exist. This is verified by a post-destroy script that enumerates remaining resources. The only exception is the 7-day mandatory KMS key deletion waiting period (AWS-enforced, cannot be overridden).
+
+---
+
+#### Question 6.2: Three Operational Modes
+**Q: Name the three operational modes for managing the CI lifecycle and describe when each is used.**
+
+**A:**
+- **HIBERNATE** — pause compute to reduce cost when the team isn't actively using the environment (conferences, breaks). Storage persists; restart is fast (minutes). Residual cost: ~$50/month.
+- **DECOMMISSION** — controlled HIPAA-compliant shutdown at end of Period of Performance. PHI destroyed per policy; audit logs retained for 6–7 years; KMS keys scheduled for 30-day deletion. Used when real PHI is involved and retention obligations apply.
+- **DESTROY** — total purge for development/synthetic environments. Everything deleted including audit logs. Nothing remains. Used when there are no compliance retention obligations (synthetic data only). Residual cost: $0 after 7-day KMS wait.
+
+---
+
+#### Question 6.3: IT Staff and PHI Separation
+**Q: Why can't IT Staff decrypt PHI data even though they have admin access to the infrastructure?**
+
+**A:** The KMS key policy on `phi-data-key` explicitly denies the `InfraAdmin` role decrypt permission. This is enforced at the key level, not the IAM level — even if an IAM policy granted broad S3 access, the key policy blocks decryption. This is separation of duties: IT Staff builds and maintains the system but cannot read patient data. If they need to troubleshoot a data issue, they escalate to the PI who has decrypt permission. A compromised IT credential therefore cannot exfiltrate PHI — it can only affect infrastructure.
+
+Note: This is a *key policy* enforcement, not an SCP. SCPs are institutional guardrails from UW IT applied at the Organization level. Key policies are project-level controls on individual encryption keys.
+
+---
+
+### Medium (Understanding)
+
+#### Question 6.4: Gatekeeper Blind Spot
+**Q: A researcher on their laptop pastes a code error containing an MRN into ChatGPT. Why doesn't the gatekeeper catch this?**
+
+**A:** The gatekeeper only intercepts prompts originating *from within the research environment* (EC2/SageMaker → gatekeeper → Bedrock). A copy-paste from the researcher's laptop browser to an external AI service is entirely outside the compliance perimeter — it never touches AWS infrastructure, so there's nothing for the gatekeeper to intercept.
+
+This is why the architecture uses multiple layers of defense for this scenario:
+1. **No general internet from research compute** — the researcher can't paste into ChatGPT from the remote desktop because external AI services are network-blocked
+2. **No PHI on the laptop** — by policy, PHI doesn't exist on the laptop, so there should be nothing to paste
+3. **Training** — researchers are taught that error messages can contain PHI (MRNs, patient names) and that pasting them externally is a breach
+
+The gap: if a researcher is viewing PHI on the remote desktop and manually transcribes or memorizes an MRN, then types it into their laptop browser — no technical control can prevent this. This is why training and sanctions exist alongside technical controls.
+
+---
+
+#### Question 6.5: VPC Endpoints vs. NAT Gateway
+**Q: The project uses VPC Endpoints for most AWS services but a NAT Gateway for GitHub. Why the difference?**
+
+**A:** VPC Endpoints create private connections between the VPC and AWS services — they work because AWS controls both ends (your VPC and the service endpoint). Traffic stays entirely within AWS's internal network and never touches the public internet.
+
+GitHub is not an AWS service. There is no VPC Endpoint for it. The only way to reach GitHub from a private subnet (which has no internet gateway) is through a NAT Gateway, which provides controlled outbound internet access. The NAT Gateway's security group and NACL rules restrict outbound traffic to GitHub's published IP ranges on port 443 only — so it's not general internet access, just a narrow, auditable hole for git operations.
+
+Alternative: AWS CodeCommit (AWS-native git) would eliminate the need for any NAT Gateway entirely, but GitHub's collaboration ecosystem is more practical for a multi-institution team.
+
+---
+
+#### Question 6.6: Fail-Closed Design
+**Q: What happens if the Comprehend Medical gatekeeper service crashes — can researchers still use Bedrock?**
+
+**A:** No. The system uses fail-closed design: if the gatekeeper is unavailable (crash, timeout, maintenance), Bedrock access is *blocked*, not bypassed. Researchers see "AI service temporarily unavailable (gatekeeper offline)." An alert fires to IT Staff for immediate investigation.
+
+The alternative (fail-open: bypass the gatekeeper when it's down) would mean that any gatekeeper outage creates a window where PHI could flow to Bedrock unscanned. Fail-closed is the conservative choice — it prioritizes PHI protection over AI availability. A researcher who needs AI assistance during a gatekeeper outage must wait for the fix or work without AI temporarily.
+
+---
+
+### Hard (Synthesis)
+
+#### Question 6.7: PI Departure
+**Q: The PI leaves the project mid-PoP. Identify the distinct compliance problems this creates.**
+
+**A:** The PI's departure creates at least six compliance problems beyond "someone else needs to do the work":
+
+1. **Privacy Officer vacancy** — HIPAA requires a designated Privacy Officer at all times. Someone must be named immediately (likely the Postdoc as deputy, or a new PI must be appointed).
+
+2. **Risk acceptance authority gone** — the PI is the only person authorized to accept residual risk. The risk assessment (Gate G2) was signed by this PI. A new sponsor must be designated and must review and re-sign the risk acceptance.
+
+3. **Access approval chain broken** — all new access grants require PI (Privacy Officer) approval. No one can be onboarded, and no access changes can be made, until a new approver is designated.
+
+4. **Breach notification authority** — if a breach occurs, who decides whether to notify HHS? That decision authority was the PI's. Without a designated decision-maker, the project cannot execute its incident response plan.
+
+5. **Budget authority** — the NIH award names a specific PI. Changing the PI requires NIH approval (a formal process that can take months). During the gap, budget decisions are in limbo.
+
+6. **Gate G1 potentially invalidated** — the charter was signed by this PI accepting specific responsibilities. A new PI may need to re-sign or amend the charter, effectively re-satisfying G1.
+
+**Mitigation:** The project designates the Postdoc as deputy for operational decisions (documented in the charter). This provides continuity for items 1, 3, and 4 in the short term. Items 2, 5, and 6 require institutional action (new PI appointment, NIH notification).
+
+---
+
+#### Question 6.8: Agentic AI and Minimum Necessary
+**Q: A student runs an AI agent (Kiro in agentic mode) that autonomously queries all 10,000 patient records to answer a simple question about average age. Is this a compliance violation? Why or why not, and what evidence would an auditor examine?**
+
+**A:** This is **not** a compliance violation — but it raises a minimum-necessary question worth examining.
+
+**Why it's not a violation:**
+- The student's IAM role (`Researcher`) permits querying the full study cohort (all 10,000 patients)
+- The database view grants SELECT on the cohort — no access boundary was crossed
+- Computing average age requires all records (you need every age value to calculate the mean)
+- The agent operates under the student's credentials, within the student's approved scope
+
+**What an auditor would examine:**
+1. CloudTrail logs showing the query (what was accessed, when, from where)
+2. The user-agent tag identifying the action as agent-initiated (`kiro-agent/1.0`)
+3. The agent session log showing the original request ("what's the average age of the cohort?")
+4. The result returned (a single number — not a data dump)
+5. Whether the data accessed was within the student's approved scope (it is)
+
+**The minimum-necessary nuance:** Did the agent need to SELECT all columns, or just the age column? If the agent ran `SELECT * FROM cohort_view` when `SELECT age FROM cohort_view` would suffice, that's an over-fetch. It's not a *violation* (the student has access to all columns in the view), but it's a minimum-necessary concern flagged during monthly access review. The agent's behavior should be corrected to query only needed columns.
+
+**Key principle:** The researcher is accountable for agent actions. The agent audit trail is what makes compliance *demonstrable* — without it, the bulk query looks identical to insider threat activity.
+
+---
+
+#### Question 6.9: Adding a New AWS Service
+**Q: You want to add Amazon HealthLake to the project. Walk through the sequence of checks and approvals needed before it can touch PHI.**
+
+**A:** Adding a new service that will handle PHI requires checks across multiple layers. The sequence:
+
+1. **BAA coverage check** — Is HealthLake on the [AWS HIPAA Eligible Services](https://aws.amazon.com/compliance/hipaa-eligible-services-reference/) list? If not, it cannot touch PHI regardless of other controls. (HealthLake is HIPAA-eligible.)
+
+2. **SCP compatibility** — Does UW IT's region restriction SCP allow HealthLake? Is it available in us-west-2? If region-restricted, request SCP amendment from UW IT.
+
+3. **Risk assessment update** — New asset in scope. What threats does it introduce? Update `RISK_ASSESSMENT.md` with new scenarios (e.g., "HealthLake misconfigured, exposes FHIR data"). Score likelihood and impact; define mitigations.
+
+4. **Policy review** — Does the Data Handling policy (POL-DH-001) cover this storage type? Does the Access Control policy cover who can access it? Update policies if needed.
+
+5. **KMS integration** — Which key encrypts HealthLake data? Likely `phi-data-key`. Update key policy to allow HealthLake service role to encrypt/decrypt.
+
+6. **IAM update** — Which human roles can access HealthLake? Add permissions to appropriate roles (`SeniorResearcher`, `Researcher`). Ensure `InfraAdmin` has admin but no data-plane access (separation of duties).
+
+7. **VPC Endpoint** — Does HealthLake have a VPC Interface Endpoint? If yes, add it. If no, determine how it's accessed (may require NAT or may be account-level like Config).
+
+8. **CDK implementation** — Add HealthLake resource to the appropriate CDK stack. Deploy.
+
+9. **Config rules** — Add compliance rules for the new service (encryption enabled, access logging, etc.).
+
+10. **Security validation** — Re-run the relevant portions of the Gate G5 checklist for the new resource (encryption verified, access control tested, logging confirmed).
+
+11. **If it involves AI processing** — Run through the AI service approval process (POLICY_AI_ACCEPTABLE_USE.md Section 8).
+
+**Note:** This does NOT require re-walking Gates G1–G4. Those are already satisfied. It triggers a *partial G5 re-validation* for the new component only. The system is already authorized (G6); adding a service is a change-management event during Phase 5 operations.

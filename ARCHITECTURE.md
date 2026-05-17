@@ -293,8 +293,9 @@ Researcher action (code completion, AI query, paste)
 | Detection Result | Action | Audit |
 |-----------------|--------|-------|
 | No PHI entities detected | Forward prompt to Bedrock | Log: allowed, timestamp, user, prompt hash |
-| PHI detected (high confidence) | Block prompt; notify researcher with explanation of what was found | Log: blocked, timestamp, user, entities detected, prompt hash |
-| PHI detected (low confidence) | Warn researcher; allow override with acknowledgment | Log: warned, timestamp, user, entities flagged, override decision |
+| PHI detected (high confidence ≥0.9) | Block prompt; notify researcher with explanation of what was found | Log: blocked, timestamp, user, entities detected, prompt hash |
+| PHI detected (medium confidence 0.7–0.9) | Warn researcher; allow override with acknowledgment | Log: warned, timestamp, user, entities flagged, override decision |
+| PHI detected (low confidence <0.7) | Forward prompt with flag for periodic review | Log: flagged, timestamp, user, entities suspected |
 
 **Training integration:** The gatekeeper serves double duty — it's a technical control *and* a training tool. Every time a researcher sees "PHI detected in your prompt: MRN found," they learn to recognize PHI in contexts they hadn't considered.
 
@@ -536,7 +537,7 @@ SCPs are guardrails applied by the Management account (UW IT) to all member acco
 **Project responsibility:** The project team does not create or manage SCPs — that's UW IT's domain. The project team's responsibility is to:
 1. Request the SCP manifest from UW IT (know what guardrails are in place)
 2. Verify that project infrastructure operates within SCP boundaries (CDK deployments won't fail due to SCP denials)
-3. Document the SCPs as compliance evidence ("these institutional guardrails protect our environment")
+3. Document the SCPs as compliance evidence ("these institutional guardrails protect the project environment")
 
 ---
 
@@ -1185,7 +1186,7 @@ The $0.10/hr range for databases comes from using the smallest instance classes:
 |----------|------|-----|-------------|----------|
 | db.t3.micro | 2 | 1 GB | $0.018/hr | Development/testing only |
 | db.t3.small | 2 | 2 GB | $0.036/hr | Very light workloads |
-| db.t3.medium | 2 | 4 GB | $0.068/hr | **Our starting point** — adequate for 10K patients |
+| db.t3.medium | 2 | 4 GB | $0.068/hr | **Starting point for this project** — adequate for 10K patients |
 | db.t3.large | 2 | 8 GB | $0.136/hr | If queries need more memory |
 | db.r5.large | 2 | 16 GB | $0.240/hr | Memory-intensive analytics |
 
