@@ -10,12 +10,12 @@ This document describes the synthetic datasets generated for the securecomputing
 
 | Dataset | Description | Format | Volume | Link |
 |---------|-------------|--------|--------|------|
-| **PD0** | Patient EHR (OMOP CDM v5.4) | CSV (relational tables) | 10,000 patients, ~500K+ rows | MRN in PERSON/PHI_MAPPING |
-| **PD1** | Kidney stone composition (PXRD + FTIR) | CIF | 0–3 per patient (~5K–8K files) | MRN in filename + header |
-| **PD2** | Gene sequence data | VCF (Variant Call Format) | 1 per patient (10K files) | MRN in filename |
-| **PD3** | Lab test results | CSV (tabular, longitudinal) | Multiple per patient over time | MRN column |
+| **PD0** | Patient EHR (OMOP CDM v5.4) | CSV (relational tables) | 11,272 patients, ~7.3M rows across 8 tables | MRN in PHI_MAPPING |
+| **PD1** | Kidney stone composition (PXRD + FTIR) | CIF | 14,638 files (0–3 per patient) | MRN in filename + header |
+| **PD2** | Gene sequence data | VCF (Variant Call Format) | 11,272 files (1 per patient) | MRN in filename |
+| **PD3** | Lab test results | CSV (tabular, longitudinal) | 1,468,728 rows | MRN column |
 
-All datasets are linked by a common synthetic MRN (format: one uppercase letter + 8 digits, e.g., `B48291037`).
+All datasets are linked by a common synthetic MRN (format: one uppercase letter + 8 digits, e.g., `B48291037`). Total generated data: ~896 MB across 25,928 files.
 
 ---
 
@@ -65,12 +65,13 @@ One VCF file per patient containing synthetic genetic variants. VCF is the stand
 
 ### Details
 
-- 100–10,000 variants per patient (randomized)
-- Plausible genomic positions and allele frequencies
-- Structurally valid VCF v4.3 format
-- Linked to patient via MRN in filename
+- 100–500 background variants per patient (benign, genome-wide)
+- Stone patients additionally have 1–4 pathogenic variants in stone-associated genes (10 genes: SLC3A1, SLC7A9, CLCN5, CASR, VDR, AGXT, GRHPR, HOGA1, SLC22A12, APRT)
+- Variant-to-stone-type correlation is clinically coherent (cystine stones → SLC3A1/SLC7A9; COM stones → AGXT/VDR; uric acid → SLC22A12)
+- Structurally valid VCF v4.3 format, GRCh38 reference
+- Linked to patient via MRN in filename and header
 
-> 🔄 Full specification TBD. See `securecomputing-datagen/docs/DATA_DESIGN.md`.
+See `securecomputing-datagen/docs/DATA_DESIGN.md` for full gene list and coherence rules.
 
 ---
 
@@ -78,7 +79,7 @@ One VCF file per patient containing synthetic genetic variants. VCF is the stand
 
 ### Format: CSV (tabular, longitudinal)
 
-Multiple lab visits per patient over the observation period. Includes standard clinical panels with values drawn from realistic distributions correlated with patient conditions.
+Multiple lab visits per patient (3–12 visits over 2020–2025). Includes standard clinical panels with values correlated with stone type per the clinically coherent design.
 
 ### Panels Included
 
@@ -89,21 +90,37 @@ Multiple lab visits per patient over the observation period. Includes standard c
 | Lipid Panel | Total cholesterol, LDL, HDL, Triglycerides |
 | Liver Function | ALT, AST, ALP, Bilirubin, Albumin |
 | HbA1c | Hemoglobin A1c (diabetes marker) |
+| Stone Panel | Urine calcium, urine oxalate, urine citrate, urine pH, uric acid, urine cystine, phosphorus, PTH |
 
-> 🔄 Full specification TBD. See `securecomputing-datagen/docs/DATA_DESIGN.md`.
+### Clinically Coherent Design
+
+Lab values are shifted for stone patients to reflect established clinical correlations (e.g., calcium stone patients show elevated urine calcium and low citrate). Non-stone-related tests remain at population-normal values. No novel/unexpected correlations exist in the data.
+
+See `securecomputing-datagen/docs/DATA_DESIGN.md` for full correlation tables.
 
 ---
 
 ## PD0: Patient EHR (OMOP CDM)
 
-The central dataset: 10,000 synthetic patients in OMOP Common Data Model v5.4 format. Generated via Synthea → ETL-Synthea → OMOP tables, with a PHI extension adding realistic names, MRNs, addresses, and other HIPAA identifiers.
+The central dataset: 11,272 synthetic patients in OMOP Common Data Model v5.4 format. Generated via Synthea → custom ETL → OMOP tables, with a PHI extension adding MRNs, and stone-related clinical records enriching the base data.
+
+| OMOP Table | Rows |
+|-----------|------|
+| person | 11,272 |
+| observation_period | 11,272 |
+| visit_occurrence | 628,004 |
+| condition_occurrence | 399,746 |
+| drug_exposure | 498,895 |
+| procedure_occurrence | 1,746,871 |
+| measurement | 2,983,419 |
+| observation | 1,104,789 |
 
 OMOP provides the relational backbone that links all other datasets:
-- PD1 links via PROCEDURE_OCCURRENCE (stone analysis ordered) + SPECIMEN (stone collected)
-- PD2 links via SPECIMEN (blood/tissue sample) + PROCEDURE_OCCURRENCE (sequencing)
+- PD1 links via PROCEDURE_OCCURRENCE (stone analysis ordered) + composition in MEASUREMENT
+- PD2 links via patient MRN (genomic variants correlated with stone type)
 - PD3 links via MEASUREMENT (lab values also stored in OMOP standard format)
 
-> 🔄 Full specification in `securecomputing-datagen/docs/DATA_DESIGN.md`.
+> Full generation pipeline in `securecomputing-datagen/BUILD.md`.
 
 ---
 

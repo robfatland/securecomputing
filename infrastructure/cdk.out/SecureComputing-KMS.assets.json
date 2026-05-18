@@ -1,0 +1,21 @@
+{
+  "version": "53.0.0",
+  "files": {
+    "d7e96bbe4d2e372ae6e4ebe78348f9e4c95994bcdab6d27a82fda791188df71a": {
+      "displayName": "SecureComputing-KMS Template",
+      "source": {
+        "path": "SecureComputing-KMS.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-west-2-e2adbffc": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2",
+          "objectKey": "d7e96bbe4d2e372ae6e4ebe78348f9e4c95994bcdab6d27a82fda791188df71a.json",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

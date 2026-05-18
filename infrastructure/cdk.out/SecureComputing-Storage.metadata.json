@@ -1,0 +1,362 @@
+{
+  "/SecureComputing-Storage": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "managed-by",
+          "value": "cdk"
+        },
+        {
+          "key": "mode",
+          "value": "destroy"
+        },
+        {
+          "key": "project",
+          "value": "securecomputing"
+        }
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/SecureComputing-Storage/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/DataBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketE3889A50"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/SecureComputing-Storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/RDSSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RDSSecurityGroup6BF2CF10"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/OmopDatabase/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OmopDatabase7BFA4CE9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/SharedEFS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SharedEFS8EBD8F2E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new FileSystem2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/SharedEFS/EfsMountTarget1": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SharedEFSEfsMountTarget14761E90C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-efs/lib/efs-file-system.js:1:153 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new FileSystem2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/Exports/Output{\"Fn::GetAtt\":[\"DataBucketE3889A50\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/DataBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketPolicy3231C704"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/SecureComputing-Storage/DataBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DataBucketAutoDeleteObjectsCustomResource9FB51BF3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/OmopDatabase/SubnetGroup/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OmopDatabaseSubnetGroupC16C8353"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/OmopDatabase/Secret/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OmopDatabaseSecret08DE5E1B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/SharedEFS/EfsSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SharedEFSEfsSecurityGroup54B1C2E3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new FileSystem2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Storage/OmopDatabase/Secret/Attachment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OmopDatabaseSecretAttachmentCEE3B4A3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

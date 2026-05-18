@@ -1,0 +1,541 @@
+{
+ "Resources": {
+  "AuditBucketB01E0AE8": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": {
+         "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttAuditKeyB2DBB069Arn5601654C"
+        },
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/AuditBucket/Resource"
+   }
+  },
+  "AuditBucketPolicy9F807F4B": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "AuditBucketB01E0AE8"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "AuditBucketB01E0AE8",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "AuditBucketB01E0AE8",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:PutBucketPolicy",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "AuditBucketB01E0AE8",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "AuditBucketB01E0AE8",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:GetBucketAcl",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudtrail.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::GetAtt": [
+         "AuditBucketB01E0AE8",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "s3:PutObject",
+       "Condition": {
+        "StringEquals": {
+         "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudtrail.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "AuditBucketB01E0AE8",
+            "Arn"
+           ]
+          },
+          "/AWSLogs/",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/AuditBucket/Policy/Resource"
+   }
+  },
+  "AuditBucketAutoDeleteObjectsCustomResource90C6E1EF": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "AuditBucketB01E0AE8"
+    }
+   },
+   "DependsOn": [
+    "AuditBucketPolicy9F807F4B"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/AuditBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2"
+     },
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "AuditBucketB01E0AE8"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+    "aws:asset:property": "Code"
+   }
+  },
+  "ProjectTrail1A364949": {
+   "Type": "AWS::CloudTrail::Trail",
+   "Properties": {
+    "EnableLogFileValidation": true,
+    "EventSelectors": [
+     {
+      "DataResources": [
+       {
+        "Type": "AWS::S3::Object",
+        "Values": [
+         {
+          "Fn::Join": [
+           "",
+           [
+            {
+             "Fn::ImportValue": "SecureComputing-Storage:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+            },
+            "/"
+           ]
+          ]
+         }
+        ]
+       }
+      ],
+      "IncludeManagementEvents": false
+     }
+    ],
+    "IncludeGlobalServiceEvents": true,
+    "IsLogging": true,
+    "IsMultiRegionTrail": false,
+    "KMSKeyId": {
+     "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttAuditKeyB2DBB069Arn5601654C"
+    },
+    "S3BucketName": {
+     "Ref": "AuditBucketB01E0AE8"
+    },
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "DependsOn": [
+    "AuditBucketPolicy9F807F4B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/ProjectTrail/Resource"
+   }
+  },
+  "GuardDutyDetector": {
+   "Type": "AWS::GuardDuty::Detector",
+   "Properties": {
+    "Enable": true,
+    "FindingPublishingFrequency": "FIFTEEN_MINUTES",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/GuardDutyDetector"
+   }
+  },
+  "ConfigRoleF94F46B6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "config.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWS_ConfigRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/ConfigRole/Resource"
+   }
+  },
+  "ConfigRecorder": {
+   "Type": "AWS::Config::ConfigurationRecorder",
+   "Properties": {
+    "RecordingGroup": {
+     "AllSupported": true,
+     "IncludeGlobalResourceTypes": true
+    },
+    "RoleARN": {
+     "Fn::GetAtt": [
+      "ConfigRoleF94F46B6",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/ConfigRecorder"
+   }
+  },
+  "ConfigDelivery": {
+   "Type": "AWS::Config::DeliveryChannel",
+   "Properties": {
+    "S3BucketName": {
+     "Ref": "AuditBucketB01E0AE8"
+    },
+    "S3KeyPrefix": "config/"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/ConfigDelivery"
+   }
+  },
+  "S3EncryptionRule2F3F8AE3": {
+   "Type": "AWS::Config::ConfigRule",
+   "Properties": {
+    "ConfigRuleName": "s3-encryption-enabled",
+    "Source": {
+     "Owner": "AWS",
+     "SourceIdentifier": "S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/S3EncryptionRule/Resource"
+   }
+  },
+  "S3PublicReadRule9A15162D": {
+   "Type": "AWS::Config::ConfigRule",
+   "Properties": {
+    "ConfigRuleName": "s3-no-public-read",
+    "Source": {
+     "Owner": "AWS",
+     "SourceIdentifier": "S3_BUCKET_PUBLIC_READ_PROHIBITED"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/S3PublicReadRule/Resource"
+   }
+  },
+  "RDSEncryptionRule5323607C": {
+   "Type": "AWS::Config::ConfigRule",
+   "Properties": {
+    "ConfigRuleName": "rds-encrypted",
+    "Source": {
+     "Owner": "AWS",
+     "SourceIdentifier": "RDS_STORAGE_ENCRYPTED"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/RDSEncryptionRule/Resource"
+   }
+  },
+  "EBSEncryptionRule428A73A4": {
+   "Type": "AWS::Config::ConfigRule",
+   "Properties": {
+    "ConfigRuleName": "ebs-encrypted",
+    "Source": {
+     "Owner": "AWS",
+     "SourceIdentifier": "ENCRYPTED_VOLUMES"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/EBSEncryptionRule/Resource"
+   }
+  },
+  "CloudTrailEnabledRule2040686E": {
+   "Type": "AWS::Config::ConfigRule",
+   "Properties": {
+    "ConfigRuleName": "cloudtrail-enabled",
+    "Source": {
+     "Owner": "AWS",
+     "SourceIdentifier": "CLOUD_TRAIL_ENABLED"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/CloudTrailEnabledRule/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/5VPS0/DMAz+Les5DbCNC7etuyKqwg0hlKVe5zVNpMQZVFH+O0kj8Thy8mf7e9hrvr7f8tuV+HC17Mda4ZGHZxJyZGn0HtyGh72XIxBrTrqg11BN+Im6eqh+yzI/0ZeV44W682QOoIDg6XgBSa6Kb6ysWqNQzj+upf+HdxGkWwkm0It1ZFIZ35MVqHh4ySUHLCCywQvb955mnmaHdJMkYxmKiYfOKMjMXJOJ0ScceEiDZoHeCkKjO5DG9mDZold4BTs3Z6E1KPYotBig73wxKrrcxcga78hMHTjjrSw53/jPqrXmiilgLxywnXNA6b0B9RBZO9PZ6JsNv9vw7eriEGvrNeEEvCv1C5JH+RDLAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Monitoring/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

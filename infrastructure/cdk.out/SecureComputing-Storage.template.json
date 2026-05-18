@@ -1,0 +1,594 @@
+{
+ "Resources": {
+  "DataBucketE3889A50": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": {
+         "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+        },
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/DataBucket/Resource"
+   }
+  },
+  "DataBucketPolicy3231C704": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "DataBucketE3889A50"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "DataBucketE3889A50",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "DataBucketE3889A50",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:PutBucketPolicy",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "DataBucketE3889A50",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "DataBucketE3889A50",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/DataBucket/Policy/Resource"
+   }
+  },
+  "DataBucketAutoDeleteObjectsCustomResource9FB51BF3": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "DataBucketE3889A50"
+    }
+   },
+   "DependsOn": [
+    "DataBucketPolicy3231C704"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/DataBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2"
+     },
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "DataBucketE3889A50"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+    "aws:asset:property": "Code"
+   }
+  },
+  "RDSSecurityGroup6BF2CF10": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "RDS PostgreSQL access",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "255.255.255.255/32",
+      "Description": "Disallow all traffic",
+      "FromPort": 252,
+      "IpProtocol": "icmp",
+      "ToPort": 86
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77"
+      },
+      "Description": "PostgreSQL from VPC",
+      "FromPort": 5432,
+      "IpProtocol": "tcp",
+      "ToPort": 5432
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCB253283A88774436"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/RDSSecurityGroup/Resource"
+   }
+  },
+  "OmopDatabaseSubnetGroupC16C8353": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for OmopDatabase database",
+    "SubnetIds": [
+     {
+      "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+     },
+     {
+      "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet2Subnet469B8F8EBBCB1A53"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/OmopDatabase/SubnetGroup/Default"
+   }
+  },
+  "OmopDatabaseSecret08DE5E1B": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"postgres\"}"
+    },
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/OmopDatabase/Secret/Resource"
+   }
+  },
+  "OmopDatabaseSecretAttachmentCEE3B4A3": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "OmopDatabaseSecret08DE5E1B"
+    },
+    "TargetId": {
+     "Ref": "OmopDatabase7BFA4CE9"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/OmopDatabase/Secret/Attachment/Resource"
+   }
+  },
+  "OmopDatabase7BFA4CE9": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "20",
+    "BackupRetentionPeriod": 1,
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t3.micro",
+    "DBName": "omop",
+    "DBSubnetGroupName": {
+     "Ref": "OmopDatabaseSubnetGroupC16C8353"
+    },
+    "DeletionProtection": false,
+    "Engine": "postgres",
+    "EngineVersion": "16",
+    "KmsKeyId": {
+     "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+    },
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "OmopDatabaseSecret08DE5E1B"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "OmopDatabaseSecret08DE5E1B"
+       },
+       ":SecretString:username::}}"
+      ]
+     ]
+    },
+    "MaxAllocatedStorage": 100,
+    "MultiAZ": false,
+    "PubliclyAccessible": false,
+    "StorageEncrypted": true,
+    "StorageType": "gp2",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "RDSSecurityGroup6BF2CF10",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/OmopDatabase/Resource"
+   }
+  },
+  "SharedEFS8EBD8F2E": {
+   "Type": "AWS::EFS::FileSystem",
+   "Properties": {
+    "AvailabilityZoneName": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "Encrypted": true,
+    "FileSystemTags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-Storage/SharedEFS"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "KmsKeyId": {
+     "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+    },
+    "PerformanceMode": "generalPurpose"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/SharedEFS/Resource"
+   }
+  },
+  "SharedEFSEfsSecurityGroup54B1C2E3": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-Storage/SharedEFS/EfsSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-Storage/SharedEFS"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCB253283A88774436"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/SharedEFS/EfsSecurityGroup/Resource"
+   }
+  },
+  "SharedEFSEfsMountTarget14761E90C": {
+   "Type": "AWS::EFS::MountTarget",
+   "Properties": {
+    "FileSystemId": {
+     "Ref": "SharedEFS8EBD8F2E"
+    },
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "SharedEFSEfsSecurityGroup54B1C2E3",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/SharedEFS/EfsMountTarget1"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/5VQyU7DMBD9lubsGmjLhVvTCMQBUbXcEEKOO03dJjbyjIEo8r8zqenGjdMsb5llJEe3E3k9UF841KvdsDal7Jak9E5w673DsezyoHdAYra2KXvtssZ8G5vdZeeyns/0PYQyUaeBXAE1EDyXW9CEWXwTCZq72uj25Jrqf3gnAe9K0IDdW0cBesT7gw7eUPvgXfjoJ1w0ovArlF2hSJUK4dEiKatBLENpgY6aIj9vHNjs5NMvivygjAL3XWyUVRV42aWRPTGFF+UrfgbxXzf9ruJI+IvwBWte7t7UsGyRL+upl9WTC/ZXF6OYBSTXLABd8HwE46f8App792lW4HO+QkwRgfh1lbFVFPOWNs5ejeXNWE4GWzRm6HmGaUAuUvwBPzpq4CcCAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Storage/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F": {
+   "Value": {
+    "Fn::GetAtt": [
+     "DataBucketE3889A50",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "SecureComputing-Storage:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,858 @@
+{
+ "Resources": {
+  "IDEInstanceRole348A15AF": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDEInstanceRole/Resource"
+   }
+  },
+  "IDESecurityGroup1DF03256": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "IDE instances - no inbound (SSM only)",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCB253283A88774436"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDESecurityGroup/Resource"
+   }
+  },
+  "IDEpiInstanceProfile204D04E9": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-pi/InstanceProfile"
+   }
+  },
+  "IDEpi883FC06C": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 50
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "IDEpiInstanceProfile204D04E9"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.medium",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IDESecurityGroup1DF03256",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    "Tags": [
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     },
+     {
+      "Key": "role",
+      "Value": "ide"
+     },
+     {
+      "Key": "researcher",
+      "Value": "pi"
+     },
+     {
+      "Key": "auto-manage",
+      "Value": "true"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "IDEInstanceRole348A15AF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-pi/Resource"
+   }
+  },
+  "IDEpostdocInstanceProfile0D7276E7": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-postdoc/InstanceProfile"
+   }
+  },
+  "IDEpostdoc56586FD9": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 50
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "IDEpostdocInstanceProfile0D7276E7"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.medium",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IDESecurityGroup1DF03256",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    "Tags": [
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     },
+     {
+      "Key": "role",
+      "Value": "ide"
+     },
+     {
+      "Key": "researcher",
+      "Value": "postdoc"
+     },
+     {
+      "Key": "auto-manage",
+      "Value": "true"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "IDEInstanceRole348A15AF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-postdoc/Resource"
+   }
+  },
+  "IDEcopiInstanceProfileC7A16B17": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-copi/InstanceProfile"
+   }
+  },
+  "IDEcopiCFEF2E61": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 50
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "IDEcopiInstanceProfileC7A16B17"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.medium",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IDESecurityGroup1DF03256",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    "Tags": [
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     },
+     {
+      "Key": "role",
+      "Value": "ide"
+     },
+     {
+      "Key": "researcher",
+      "Value": "copi"
+     },
+     {
+      "Key": "auto-manage",
+      "Value": "true"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "IDEInstanceRole348A15AF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-copi/Resource"
+   }
+  },
+  "IDEstudent1InstanceProfile69D6B747": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-student1/InstanceProfile"
+   }
+  },
+  "IDEstudent19FE05FB6": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 50
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "IDEstudent1InstanceProfile69D6B747"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.medium",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IDESecurityGroup1DF03256",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    "Tags": [
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     },
+     {
+      "Key": "role",
+      "Value": "ide"
+     },
+     {
+      "Key": "researcher",
+      "Value": "student1"
+     },
+     {
+      "Key": "auto-manage",
+      "Value": "true"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "IDEInstanceRole348A15AF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-student1/Resource"
+   }
+  },
+  "IDEstudent2InstanceProfileFB18C9FC": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-student2/InstanceProfile"
+   }
+  },
+  "IDEstudent237EB43AD": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 50
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "IDEstudent2InstanceProfileFB18C9FC"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.medium",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IDESecurityGroup1DF03256",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    "Tags": [
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     },
+     {
+      "Key": "role",
+      "Value": "ide"
+     },
+     {
+      "Key": "researcher",
+      "Value": "student2"
+     },
+     {
+      "Key": "auto-manage",
+      "Value": "true"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "IDEInstanceRole348A15AF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-student2/Resource"
+   }
+  },
+  "IDEstudent3InstanceProfileD53A23BF": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-student3/InstanceProfile"
+   }
+  },
+  "IDEstudent32E407ACD": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 50
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "IDEstudent3InstanceProfileD53A23BF"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.medium",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "IDESecurityGroup1DF03256",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    "Tags": [
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     },
+     {
+      "Key": "role",
+      "Value": "ide"
+     },
+     {
+      "Key": "researcher",
+      "Value": "student3"
+     },
+     {
+      "Key": "auto-manage",
+      "Value": "true"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "IDEInstanceRole348A15AF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDE-student3/Resource"
+   }
+  },
+  "AutoManageLambdaServiceRole184ABF7A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoManageLambda/ServiceRole/Resource"
+   }
+  },
+  "AutoManageLambdaServiceRoleDefaultPolicy9A0870A5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:DescribeInstances",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:DeleteTags"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "ec2:ResourceTag/project": "securecomputing"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:DescribeInstances",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AutoManageLambdaServiceRoleDefaultPolicy9A0870A5",
+    "Roles": [
+     {
+      "Ref": "AutoManageLambdaServiceRole184ABF7A"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoManageLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "AutoManageLambdaA39E2FF0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "\nimport boto3\nimport os\n\nec2_client = boto3.client('ec2')\n\ndef handler(event, context):\n    action = event.get('action', 'stop')\n    \n    # Find all instances tagged for auto-management\n    response = ec2_client.describe_instances(\n        Filters=[\n            {'Name': 'tag:project', 'Values': ['securecomputing']},\n            {'Name': 'tag:role', 'Values': ['ide']},\n            {'Name': 'tag:auto-manage', 'Values': ['true']},\n        ]\n    )\n    \n    instance_ids = []\n    for reservation in response['Reservations']:\n        for instance in reservation['Instances']:\n            instance_id = instance['InstanceId']\n            state = instance['State']['Name']\n            \n            # Check keep-alive tag (skip stop if tagged)\n            tags = {t['Key']: t['Value'] for t in instance.get('Tags', [])}\n            \n            if action == 'stop':\n                if tags.get('keep-alive') == 'true':\n                    print(f\"Skipping {instance_id} (keep-alive=true)\")\n                    continue\n                if state == 'running':\n                    instance_ids.append(instance_id)\n            elif action == 'start':\n                if state == 'stopped':\n                    instance_ids.append(instance_id)\n                # Clear keep-alive tag on start\n                if tags.get('keep-alive') == 'true':\n                    ec2_client.delete_tags(\n                        Resources=[instance_id],\n                        Tags=[{'Key': 'keep-alive'}]\n                    )\n    \n    if instance_ids:\n        if action == 'stop':\n            ec2_client.stop_instances(InstanceIds=instance_ids)\n            print(f\"Stopped: {instance_ids}\")\n        elif action == 'start':\n            ec2_client.start_instances(InstanceIds=instance_ids)\n            print(f\"Started: {instance_ids}\")\n    else:\n        print(f\"No instances to {action}\")\n    \n    return {'action': action, 'instances': instance_ids}\n"
+    },
+    "Environment": {
+     "Variables": {
+      "REGION": "us-west-2"
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AutoManageLambdaServiceRole184ABF7A",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.12",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "Timeout": 60
+   },
+   "DependsOn": [
+    "AutoManageLambdaServiceRoleDefaultPolicy9A0870A5",
+    "AutoManageLambdaServiceRole184ABF7A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoManageLambda/Resource"
+   }
+  },
+  "AutoStartRuleF0D5D32D": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "ScheduleExpression": "cron(0 13 ? * MON-FRI *)",
+    "State": "ENABLED",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "Targets": [
+     {
+      "Arn": {
+       "Fn::GetAtt": [
+        "AutoManageLambdaA39E2FF0",
+        "Arn"
+       ]
+      },
+      "Id": "Target0",
+      "Input": "{\"action\":\"start\"}"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoStartRule/Resource"
+   }
+  },
+  "AutoStartRuleAllowEventRuleSecureComputingComputeAutoManageLambdaD52B0FC101E38143": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AutoManageLambdaA39E2FF0",
+      "Arn"
+     ]
+    },
+    "Principal": "events.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "AutoStartRuleF0D5D32D",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoStartRule/AllowEventRuleSecureComputingComputeAutoManageLambdaD52B0FC1"
+   }
+  },
+  "AutoStopRule58DF42E9": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "ScheduleExpression": "cron(0 1 ? * MON-FRI *)",
+    "State": "ENABLED",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "Targets": [
+     {
+      "Arn": {
+       "Fn::GetAtt": [
+        "AutoManageLambdaA39E2FF0",
+        "Arn"
+       ]
+      },
+      "Id": "Target0",
+      "Input": "{\"action\":\"stop\"}"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoStopRule/Resource"
+   }
+  },
+  "AutoStopRuleAllowEventRuleSecureComputingComputeAutoManageLambdaD52B0FC1C7B8E3C6": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AutoManageLambdaA39E2FF0",
+      "Arn"
+     ]
+    },
+    "Principal": "events.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "AutoStopRule58DF42E9",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/AutoStopRule/AllowEventRuleSecureComputingComputeAutoManageLambdaD52B0FC1"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOXQ6CMBCEz8J7qQp4AhONbw0ewJSyxBXamv5oSNO724ok+jSzM5tvt6LVvqHbgr9sKfqxnLCj4eK4GEmKrgG5pKHVE5DDoFY9K+u4EsCMHjBFTE8o5twsLhIQVcKA8AbdfDLaP3L7H6yUX2IkE5ddz2k4eiUcapXbX8/ASLQ2TenKE5Sz6T///S9pjJ8tbrgEB4a0YLU3mcxmd9NqU9NdTZvibhFL45VDCbRd9A20mzXsDQEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

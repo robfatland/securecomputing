@@ -1,0 +1,351 @@
+{
+ "Resources": {
+  "PhiDataKeyA91F21D0": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "Description": "Encrypts research PHI data (S3 validated/processed/derived, RDS, EFS)",
+    "EnableKeyRotation": true,
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PendingWindowInDays": 7,
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/PhiDataKey/Resource"
+   }
+  },
+  "PhiDataKeyAliasB973530E": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/securecomputing/phi-data",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "PhiDataKeyA91F21D0",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/PhiDataKey/Alias/Resource"
+   }
+  },
+  "PhiLandingKeyC1CF73A3": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "Description": "Encrypts raw PHI uploads in S3 landing zone",
+    "EnableKeyRotation": true,
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PendingWindowInDays": 7,
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/PhiLandingKey/Resource"
+   }
+  },
+  "PhiLandingKeyAliasD2606DAE": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/securecomputing/phi-landing",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "PhiLandingKeyC1CF73A3",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/PhiLandingKey/Alias/Resource"
+   }
+  },
+  "AuditKeyB2DBB069": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "Description": "Encrypts audit logs (CloudTrail, gatekeeper, Config)",
+    "EnableKeyRotation": true,
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PendingWindowInDays": 7,
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/AuditKey/Resource"
+   }
+  },
+  "AuditKeyAlias03A4B3A2": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/securecomputing/audit",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "AuditKeyB2DBB069",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/AuditKey/Alias/Resource"
+   }
+  },
+  "InfraKeyE8ED9C97": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "Description": "Encrypts infrastructure (EBS, ECR, Secrets Manager)",
+    "EnableKeyRotation": true,
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PendingWindowInDays": 7,
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/InfraKey/Resource"
+   }
+  },
+  "InfraKeyAlias55A0260D": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/securecomputing/infra",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "InfraKeyE8ED9C97",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/InfraKey/Alias/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzI10TNQTCwv1k1OydbNyUzSqw4uSUzO1gEKxWfnFutVe6dW6jin5YEox5zMxGIQB8yordUJqCzJyM/TN9YzNNYzUcwqzszULSrNK8nMTdULgtAA7H2ge2IAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-KMS/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8": {
+   "Value": {
+    "Fn::GetAtt": [
+     "PhiDataKeyA91F21D0",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "SecureComputing-KMS:ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+   }
+  },
+  "ExportsOutputFnGetAttAuditKeyB2DBB069Arn5601654C": {
+   "Value": {
+    "Fn::GetAtt": [
+     "AuditKeyB2DBB069",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "SecureComputing-KMS:ExportsOutputFnGetAttAuditKeyB2DBB069Arn5601654C"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

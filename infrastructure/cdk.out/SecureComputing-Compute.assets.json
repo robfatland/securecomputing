@@ -1,0 +1,21 @@
+{
+  "version": "53.0.0",
+  "files": {
+    "cc39bdc38cff6cc862be145b01b85300899920df0f5af36bca72e8007c2658cb": {
+      "displayName": "SecureComputing-Compute Template",
+      "source": {
+        "path": "SecureComputing-Compute.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-west-2-b2ca428b": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2",
+          "objectKey": "cc39bdc38cff6cc862be145b01b85300899920df0f5af36bca72e8007c2658cb.json",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

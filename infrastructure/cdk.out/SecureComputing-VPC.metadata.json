@@ -1,0 +1,1105 @@
+{
+  "/SecureComputing-VPC": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "managed-by",
+          "value": "cdk"
+        },
+        {
+          "key": "mode",
+          "value": "destroy"
+        },
+        {
+          "key": "project",
+          "value": "securecomputing"
+        }
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/SecureComputing-VPC/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCB253283A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCIGWF5245D5C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCVPCGWDD0DEE2A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/VPCFlowLogs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCFlowLogsB87C8F56"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Exports/Output{\"Fn::GetAtt\":[\"ResearchVPCB253283A\",\"CidrBlock\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Exports/Output{\"Ref\":\"ResearchVPCB253283A\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefResearchVPCB253283A88774436"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Exports/Output{\"Ref\":\"ResearchVPCPrivateSubnet1Subnet2F5E03C3\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/Exports/Output{\"Ref\":\"ResearchVPCPrivateSubnet2Subnet469B8F8E\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefResearchVPCPrivateSubnet2Subnet469B8F8EBBCB1A53"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet1SubnetD818A5B5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet1RouteTable1B702C6B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet1RouteTableAssociationB0404782"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet1DefaultRoute20B89877"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet1EIPEA47E2F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet1NATGateway0E75CFD2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet2SubnetDA23B734"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet2RouteTable91B62A95"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet2RouteTableAssociation61FD2983"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PublicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPublicSubnet2DefaultRoute21F4A30A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet1RouteTableF28C11A8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet1RouteTableAssociation23298A2E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet1DefaultRoute05DA2A34"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet2RouteTable5A1C9357"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet2RouteTableAssociation318AF9A5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../tmp/jsii-kernel-6pp21B/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/PrivateSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCPrivateSubnet2DefaultRoute401F1D15"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/RestrictDefaultSecurityGroupCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCRestrictDefaultSecurityGroupCustomResource129EAAA7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/FlowLog/FlowLog": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCFlowLog6343B34C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addFlowLog in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/S3Endpoint/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCS3Endpoint54F0A87F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addGatewayEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/SSM/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCSSMA872B89B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/SSMMessages/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCSSMMessages6D1DCEF9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/EC2Messages/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCEC2Messages32318ED7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/KMS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCKMS5F7153EF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/CloudWatchLogs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCCloudWatchLogsDFC9F134"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/STS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCSTS731E11F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/ECR/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCECR54262ED5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/ECRDocker/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCECRDocker8336F7B6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/Bedrock/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCBedrockE21615E7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/ComprehendMedical/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCComprehendMedicalDF9C5C90"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/FlowLog/IAMRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCFlowLogIAMRole02CB9A46"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addFlowLog in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/SSM/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCSSMSecurityGroup532CFEC5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/SSMMessages/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCSSMMessagesSecurityGroup00FB1BC7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/EC2Messages/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCEC2MessagesSecurityGroup2C187701"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/KMS/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCKMSSecurityGroup4CCC60A7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/CloudWatchLogs/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCCloudWatchLogsSecurityGroup927485C0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/STS/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCSTSSecurityGroup26376DA7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/ECR/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCECRSecurityGroupF3AF6F01"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/ECRDocker/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCECRDockerSecurityGroupE5CC3D23"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/Bedrock/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCBedrockSecurityGroup965B1B50"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/ComprehendMedical/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCComprehendMedicalSecurityGroup63DDFC44"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-VPC/ResearchVPC/FlowLog/IAMRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResearchVPCFlowLogIAMRoleDefaultPolicy688419E8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addFlowLog in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

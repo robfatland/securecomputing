@@ -1,0 +1,2092 @@
+{
+ "Resources": {
+  "ResearchVPCB253283A": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/Resource"
+   }
+  },
+  "ResearchVPCPublicSubnet1SubnetD818A5B5": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/28",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PublicSubnet1"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet1/Subnet"
+   }
+  },
+  "ResearchVPCPublicSubnet1RouteTable1B702C6B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PublicSubnet1"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet1/RouteTable"
+   }
+  },
+  "ResearchVPCPublicSubnet1RouteTableAssociationB0404782": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ResearchVPCPublicSubnet1RouteTable1B702C6B"
+    },
+    "SubnetId": {
+     "Ref": "ResearchVPCPublicSubnet1SubnetD818A5B5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "ResearchVPCPublicSubnet1DefaultRoute20B89877": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ResearchVPCIGWF5245D5C"
+    },
+    "RouteTableId": {
+     "Ref": "ResearchVPCPublicSubnet1RouteTable1B702C6B"
+    }
+   },
+   "DependsOn": [
+    "ResearchVPCVPCGWDD0DEE2A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "ResearchVPCPublicSubnet1EIPEA47E2F9": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PublicSubnet1"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet1/EIP"
+   }
+  },
+  "ResearchVPCPublicSubnet1NATGateway0E75CFD2": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ResearchVPCPublicSubnet1EIPEA47E2F9",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "ResearchVPCPublicSubnet1SubnetD818A5B5"
+    },
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PublicSubnet1"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ResearchVPCPublicSubnet1DefaultRoute20B89877",
+    "ResearchVPCPublicSubnet1RouteTableAssociationB0404782"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet1/NATGateway"
+   }
+  },
+  "ResearchVPCPublicSubnet2SubnetDA23B734": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.16/28",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PublicSubnet2"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet2/Subnet"
+   }
+  },
+  "ResearchVPCPublicSubnet2RouteTable91B62A95": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PublicSubnet2"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet2/RouteTable"
+   }
+  },
+  "ResearchVPCPublicSubnet2RouteTableAssociation61FD2983": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ResearchVPCPublicSubnet2RouteTable91B62A95"
+    },
+    "SubnetId": {
+     "Ref": "ResearchVPCPublicSubnet2SubnetDA23B734"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "ResearchVPCPublicSubnet2DefaultRoute21F4A30A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ResearchVPCIGWF5245D5C"
+    },
+    "RouteTableId": {
+     "Ref": "ResearchVPCPublicSubnet2RouteTable91B62A95"
+    }
+   },
+   "DependsOn": [
+    "ResearchVPCVPCGWDD0DEE2A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "ResearchVPCPrivateSubnet1Subnet2F5E03C3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PrivateSubnet1"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet1/Subnet"
+   }
+  },
+  "ResearchVPCPrivateSubnet1RouteTableF28C11A8": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PrivateSubnet1"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet1/RouteTable"
+   }
+  },
+  "ResearchVPCPrivateSubnet1RouteTableAssociation23298A2E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ResearchVPCPrivateSubnet1RouteTableF28C11A8"
+    },
+    "SubnetId": {
+     "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "ResearchVPCPrivateSubnet1DefaultRoute05DA2A34": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ResearchVPCPublicSubnet1NATGateway0E75CFD2"
+    },
+    "RouteTableId": {
+     "Ref": "ResearchVPCPrivateSubnet1RouteTableF28C11A8"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "ResearchVPCPrivateSubnet2Subnet469B8F8E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PrivateSubnet2"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet2/Subnet"
+   }
+  },
+  "ResearchVPCPrivateSubnet2RouteTable5A1C9357": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/PrivateSubnet2"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet2/RouteTable"
+   }
+  },
+  "ResearchVPCPrivateSubnet2RouteTableAssociation318AF9A5": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ResearchVPCPrivateSubnet2RouteTable5A1C9357"
+    },
+    "SubnetId": {
+     "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "ResearchVPCPrivateSubnet2DefaultRoute401F1D15": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ResearchVPCPublicSubnet1NATGateway0E75CFD2"
+    },
+    "RouteTableId": {
+     "Ref": "ResearchVPCPrivateSubnet2RouteTable5A1C9357"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "ResearchVPCIGWF5245D5C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/IGW"
+   }
+  },
+  "ResearchVPCVPCGWDD0DEE2A": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "ResearchVPCIGWF5245D5C"
+    },
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/VPCGW"
+   }
+  },
+  "ResearchVPCRestrictDefaultSecurityGroupCustomResource129EAAA7": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ResearchVPCB253283A",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "ResearchVPCFlowLogIAMRole02CB9A46": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "vpc-flow-logs.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/FlowLog"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/FlowLog/IAMRole/Resource"
+   }
+  },
+  "ResearchVPCFlowLogIAMRoleDefaultPolicy688419E8": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "VPCFlowLogsB87C8F56",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ResearchVPCFlowLogIAMRoleDefaultPolicy688419E8",
+    "Roles": [
+     {
+      "Ref": "ResearchVPCFlowLogIAMRole02CB9A46"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/FlowLog/IAMRole/DefaultPolicy/Resource"
+   }
+  },
+  "ResearchVPCFlowLog6343B34C": {
+   "Type": "AWS::EC2::FlowLog",
+   "Properties": {
+    "DeliverLogsPermissionArn": {
+     "Fn::GetAtt": [
+      "ResearchVPCFlowLogIAMRole02CB9A46",
+      "Arn"
+     ]
+    },
+    "LogDestinationType": "cloud-watch-logs",
+    "LogGroupName": {
+     "Ref": "VPCFlowLogsB87C8F56"
+    },
+    "ResourceId": {
+     "Ref": "ResearchVPCB253283A"
+    },
+    "ResourceType": "VPC",
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC/FlowLog"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "TrafficType": "ALL"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/FlowLog/FlowLog"
+   }
+  },
+  "ResearchVPCS3Endpoint54F0A87F": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "RouteTableIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1RouteTableF28C11A8"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2RouteTable5A1C9357"
+     },
+     {
+      "Ref": "ResearchVPCPublicSubnet1RouteTable1B702C6B"
+     },
+     {
+      "Ref": "ResearchVPCPublicSubnet2RouteTable91B62A95"
+     }
+    ],
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".s3"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Gateway",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/S3Endpoint/Resource"
+   }
+  },
+  "ResearchVPCSSMSecurityGroup532CFEC5": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/SSM/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/SSM/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCSSMA872B89B": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCSSMSecurityGroup532CFEC5",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.ssm",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/SSM/Resource"
+   }
+  },
+  "ResearchVPCSSMMessagesSecurityGroup00FB1BC7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/SSMMessages/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/SSMMessages/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCSSMMessages6D1DCEF9": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCSSMMessagesSecurityGroup00FB1BC7",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.ssmmessages",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/SSMMessages/Resource"
+   }
+  },
+  "ResearchVPCEC2MessagesSecurityGroup2C187701": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/EC2Messages/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/EC2Messages/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCEC2Messages32318ED7": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCEC2MessagesSecurityGroup2C187701",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.ec2messages",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/EC2Messages/Resource"
+   }
+  },
+  "ResearchVPCKMSSecurityGroup4CCC60A7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/KMS/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/KMS/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCKMS5F7153EF": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCKMSSecurityGroup4CCC60A7",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.kms",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/KMS/Resource"
+   }
+  },
+  "ResearchVPCCloudWatchLogsSecurityGroup927485C0": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/CloudWatchLogs/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/CloudWatchLogs/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCCloudWatchLogsDFC9F134": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCCloudWatchLogsSecurityGroup927485C0",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.logs",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/CloudWatchLogs/Resource"
+   }
+  },
+  "ResearchVPCSTSSecurityGroup26376DA7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/STS/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/STS/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCSTS731E11F8": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCSTSSecurityGroup26376DA7",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.sts",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/STS/Resource"
+   }
+  },
+  "ResearchVPCECRSecurityGroupF3AF6F01": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/ECR/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/ECR/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCECR54262ED5": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCECRSecurityGroupF3AF6F01",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.ecr.api",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/ECR/Resource"
+   }
+  },
+  "ResearchVPCECRDockerSecurityGroupE5CC3D23": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/ECRDocker/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/ECRDocker/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCECRDocker8336F7B6": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCECRDockerSecurityGroupE5CC3D23",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.ecr.dkr",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/ECRDocker/Resource"
+   }
+  },
+  "ResearchVPCBedrockSecurityGroup965B1B50": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/Bedrock/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/Bedrock/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCBedrockE21615E7": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCBedrockSecurityGroup965B1B50",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.bedrock-runtime",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/Bedrock/Resource"
+   }
+  },
+  "ResearchVPCComprehendMedicalSecurityGroup63DDFC44": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecureComputing-VPC/ResearchVPC/ComprehendMedical/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "ResearchVPCB253283A",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "ResearchVPCB253283A",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/ComprehendMedical/SecurityGroup/Resource"
+   }
+  },
+  "ResearchVPCComprehendMedicalDF9C5C90": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ResearchVPCComprehendMedicalSecurityGroup63DDFC44",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-west-2.comprehendmedical",
+    "SubnetIds": [
+     {
+      "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+     },
+     {
+      "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "Name",
+      "Value": "SecureComputing-VPC/ResearchVPC"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "ResearchVPCB253283A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/ResearchVPC/ComprehendMedical/Resource"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ec2:us-west-2:",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "ResearchVPCB253283A",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2"
+     },
+     "S3Key": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
+    "aws:asset:property": "Code"
+   }
+  },
+  "VPCFlowLogsB87C8F56": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 7,
+    "Tags": [
+     {
+      "Key": "managed-by",
+      "Value": "cdk"
+     },
+     {
+      "Key": "mode",
+      "Value": "destroy"
+     },
+     {
+      "Key": "project",
+      "Value": "securecomputing"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/VPCFlowLogs/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21R0W7CMAz8Ft5DthX2AQwBQpqmqJ14ndJgikcbo8ShQlX/fWkLlIc9+Xy+nM5OIpP3uXyd6NpPzf40LTGXTcbanESkfhowiWx2ZyOWB7tTS6FCXqLJQm6BO25EKQWGb52XMPIjt/CeDGpGsg9xB1Zb1ZUvzRvNUOurUA4vEY7GW8vgIr4LhiS3bsEx67ECy2JdUv1JRTe/w5so5l/Z/ZnQ8u31o+3ND9rAsyYDExzydeMonPttnolWoK5kk9KwaV8Vxav00QbUipIKL5sY4mFyx20rUvAUnInvg2eqxjba/T9Sji64B/ehPYh4TOD4SQXaohXqykeyLzP5NpPzya9HnLpgGSuQ6VD/AK02W4HlAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-VPC/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ResearchVPCB253283A",
+     "CidrBlock"
+    ]
+   },
+   "Export": {
+    "Name": "SecureComputing-VPC:ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77"
+   }
+  },
+  "ExportsOutputRefResearchVPCB253283A88774436": {
+   "Value": {
+    "Ref": "ResearchVPCB253283A"
+   },
+   "Export": {
+    "Name": "SecureComputing-VPC:ExportsOutputRefResearchVPCB253283A88774436"
+   }
+  },
+  "ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C": {
+   "Value": {
+    "Ref": "ResearchVPCPrivateSubnet1Subnet2F5E03C3"
+   },
+   "Export": {
+    "Name": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet1Subnet2F5E03C39E21E73C"
+   }
+  },
+  "ExportsOutputRefResearchVPCPrivateSubnet2Subnet469B8F8EBBCB1A53": {
+   "Value": {
+    "Ref": "ResearchVPCPrivateSubnet2Subnet469B8F8E"
+   },
+   "Export": {
+    "Name": "SecureComputing-VPC:ExportsOutputRefResearchVPCPrivateSubnet2Subnet469B8F8EBBCB1A53"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

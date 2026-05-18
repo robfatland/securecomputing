@@ -1,0 +1,271 @@
+{
+  "/SecureComputing-KMS": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "managed-by",
+          "value": "cdk"
+        },
+        {
+          "key": "mode",
+          "value": "destroy"
+        },
+        {
+          "key": "project",
+          "value": "securecomputing"
+        }
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/PhiDataKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhiDataKeyA91F21D0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/PhiLandingKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhiLandingKeyC1CF73A3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/AuditKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuditKeyB2DBB069"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/InfraKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InfraKeyE8ED9C97"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/Exports/Output{\"Fn::GetAtt\":[\"PhiDataKeyA91F21D0\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/Exports/Output{\"Fn::GetAtt\":[\"AuditKeyB2DBB069\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttAuditKeyB2DBB069Arn5601654C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "/tmp/tmpm67qzm0t/lib/program.js:1:543 (/tmp/tmpm67qzm0t/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmpm67qzm0t/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmpm67qzm0t/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/PhiDataKey/Alias/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhiDataKeyAliasB973530E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/PhiLandingKey/Alias/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhiLandingKeyAliasD2606DAE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/AuditKey/Alias/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuditKeyAlias03A4B3A2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-KMS/InfraKey/Alias/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InfraKeyAlias55A0260D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "Kernel._Kernel_create (/tmp/tmpm67qzm0t/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmpm67qzm0t/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmpm67qzm0t/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmpm67qzm0t/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmpm67qzm0t/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ]
+}
