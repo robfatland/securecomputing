@@ -51,12 +51,132 @@
   "IDESecurityGroup1DF03256": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
-    "GroupDescription": "IDE instances - no inbound (SSM only)",
+    "GroupDescription": "IDE instances - no inbound; outbound restricted",
     "SecurityGroupEgress": [
      {
+      "CidrIp": {
+       "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77"
+      },
+      "Description": "HTTPS to VPC endpoints",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "140.82.112.0/20",
+      "Description": "HTTPS to GitHub (140.82.112.0/20)",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "140.82.112.0/20",
+      "Description": "SSH to GitHub (140.82.112.0/20) for git+ssh",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "143.55.64.0/20",
+      "Description": "HTTPS to GitHub (143.55.64.0/20)",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "143.55.64.0/20",
+      "Description": "SSH to GitHub (143.55.64.0/20) for git+ssh",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "185.199.108.0/22",
+      "Description": "HTTPS to GitHub (185.199.108.0/22)",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "185.199.108.0/22",
+      "Description": "SSH to GitHub (185.199.108.0/22) for git+ssh",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "192.30.252.0/22",
+      "Description": "HTTPS to GitHub (192.30.252.0/22)",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "192.30.252.0/22",
+      "Description": "SSH to GitHub (192.30.252.0/22) for git+ssh",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "20.201.28.0/24",
+      "Description": "HTTPS to GitHub (20.201.28.0/24)",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "20.201.28.0/24",
+      "Description": "SSH to GitHub (20.201.28.0/24) for git+ssh",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "4.148.0.0/16",
+      "Description": "HTTPS to GitHub (4.148.0.0/16)",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "4.148.0.0/16",
+      "Description": "SSH to GitHub (4.148.0.0/16) for git+ssh",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
       "CidrIp": "0.0.0.0/0",
-      "Description": "Allow all outbound traffic by default",
-      "IpProtocol": "-1"
+      "Description": "DNS (TCP)",
+      "FromPort": 53,
+      "IpProtocol": "tcp",
+      "ToPort": 53
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "DNS (UDP)",
+      "FromPort": 53,
+      "IpProtocol": "udp",
+      "ToPort": 53
+     },
+     {
+      "CidrIp": {
+       "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77"
+      },
+      "Description": "NFS to EFS",
+      "FromPort": 2049,
+      "IpProtocol": "tcp",
+      "ToPort": 2049
+     },
+     {
+      "CidrIp": {
+       "Fn::ImportValue": "SecureComputing-VPC:ExportsOutputFnGetAttResearchVPCB253283ACidrBlock6DE7EF77"
+      },
+      "Description": "PostgreSQL to RDS",
+      "FromPort": 5432,
+      "IpProtocol": "tcp",
+      "ToPort": 5432
      }
     ],
     "Tags": [

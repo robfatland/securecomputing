@@ -1,16 +1,16 @@
 {
   "version": "53.0.0",
   "files": {
-    "cc39bdc38cff6cc862be145b01b85300899920df0f5af36bca72e8007c2658cb": {
+    "54c89e55a5fc3649a0cf13985f9ec943fadb93222bf9ab2d3ea698082d9ef44e": {
       "displayName": "SecureComputing-Compute Template",
       "source": {
         "path": "SecureComputing-Compute.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-us-west-2-b2ca428b": {
+        "current_account-us-west-2-fab83769": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2",
-          "objectKey": "cc39bdc38cff6cc862be145b01b85300899920df0f5af36bca72e8007c2658cb.json",
+          "objectKey": "54c89e55a5fc3649a0cf13985f9ec943fadb93222bf9ab2d3ea698082d9ef44e.json",
           "region": "us-west-2",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-west-2"
         }

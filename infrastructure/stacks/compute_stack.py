@@ -48,10 +48,68 @@ class ComputeStack(Stack):
         # Security group for IDE instances
         self.ide_sg = ec2.SecurityGroup(self, "IDESecurityGroup",
             vpc=vpc,
-            description="IDE instances - no inbound (SSM only)",
-            allow_all_outbound=True,  # Outbound via NAT (restricted at NAT level)
+            description="IDE instances - no inbound; outbound restricted",
+            allow_all_outbound=False,  # Restrict outbound explicitly
         )
         # No inbound rules — access is via SSM Session Manager only
+
+        # Outbound: allow HTTPS to VPC CIDR (for VPC endpoints)
+        self.ide_sg.add_egress_rule(
+            ec2.Peer.ipv4(vpc.vpc_cidr_block),
+            ec2.Port.tcp(443),
+            "HTTPS to VPC endpoints",
+        )
+
+        # Outbound: S3 uses Gateway Endpoint (route table based, no SG rule needed)
+
+        # Outbound: allow HTTPS to GitHub IPs (via NAT)
+        # GitHub publishes IPs at https://api.github.com/meta
+        # Major ranges (as of 2024): 140.82.112.0/20, 143.55.64.0/20, 185.199.108.0/22, 192.30.252.0/22
+        github_cidrs = [
+            "140.82.112.0/20",
+            "143.55.64.0/20",
+            "185.199.108.0/22",
+            "192.30.252.0/22",
+            "20.201.28.0/24",
+            "4.148.0.0/16",
+        ]
+        for cidr in github_cidrs:
+            self.ide_sg.add_egress_rule(
+                ec2.Peer.ipv4(cidr),
+                ec2.Port.tcp(443),
+                f"HTTPS to GitHub ({cidr})",
+            )
+            self.ide_sg.add_egress_rule(
+                ec2.Peer.ipv4(cidr),
+                ec2.Port.tcp(22),
+                f"SSH to GitHub ({cidr}) for git+ssh",
+            )
+
+        # Outbound: allow DNS (needed for resolution)
+        self.ide_sg.add_egress_rule(
+            ec2.Peer.any_ipv4(),
+            ec2.Port.tcp(53),
+            "DNS (TCP)",
+        )
+        self.ide_sg.add_egress_rule(
+            ec2.Peer.any_ipv4(),
+            ec2.Port.udp(53),
+            "DNS (UDP)",
+        )
+
+        # Outbound: allow NFS to EFS (port 2049) within VPC
+        self.ide_sg.add_egress_rule(
+            ec2.Peer.ipv4(vpc.vpc_cidr_block),
+            ec2.Port.tcp(2049),
+            "NFS to EFS",
+        )
+
+        # Outbound: allow PostgreSQL to RDS within VPC
+        self.ide_sg.add_egress_rule(
+            ec2.Peer.ipv4(vpc.vpc_cidr_block),
+            ec2.Port.tcp(5432),
+            "PostgreSQL to RDS",
+        )
 
         # Create 6 IDE instances (PI, Postdoc, Co-PI, Students 1-3)
         researcher_names = ["pi", "postdoc", "copi", "student1", "student2", "student3"]
