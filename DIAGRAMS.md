@@ -185,13 +185,26 @@ stateDiagram-v2
     Idle --> Hibernated: ops/hibernate.sh
     Hibernated --> Active: ops/wake.sh
     
-    Active --> Destroyed: cdk destroy --all
-    Idle --> Destroyed: cdk destroy --all
-    Hibernated --> Destroyed: cdk destroy --all
+    Active --> Destroyed: cdk destroy --all (DESTROY mode)
+    Idle --> Destroyed: cdk destroy --all (DESTROY mode)
+    Hibernated --> Destroyed: cdk destroy --all (DESTROY mode)
+    
+    Active --> Decommissioned: ops/decommission.sh (PRODUCTION mode)
+    Idle --> Decommissioned: ops/decommission.sh (PRODUCTION mode)
+    Hibernated --> Decommissioned: ops/decommission.sh (PRODUCTION mode)
+
+    Decommissioned --> FullyRetired: Audit logs expire (7 years)
     
     Destroyed --> [*]
+    FullyRetired --> [*]
 
     note right of Active: ~$400/month
     note right of Hibernated: ~$100/month
-    note right of Destroyed: $0
+    note right of Destroyed: $0 (after 7-day KMS wait)
+    note right of Decommissioned: ~$5/month (audit retention only)
+    note right of FullyRetired: $0
 ```
+
+**DESTROY** (this demonstrator): Everything deleted. Nothing remains. For synthetic/development systems with no retention obligations.
+
+**DECOMMISSION** (production): PHI destroyed, infrastructure torn down, but audit logs retained for 6–7 years per HIPAA. See `COMPLETION.md` for what must be built to enable this mode.

@@ -15,6 +15,9 @@
 | `POLICY_SUITE.md` | Phase 1 deliverable: template outlines for access control, data handling, incident response, sanctions, workforce security, media disposal policies |
 | `NISTDocs.md` | Reference guide: NIST publications relevant to HIPAA and CUI compliance with canonical URLs |
 | `SYNTHETIC_DATA.md` | Synthetic data overview: dataset descriptions (PD0–PD3), formats, examples, and visualizations |
+| `DIAGRAMS.md` | System architecture diagrams (Mermaid): network, data flow, IAM, lifecycle |
+| `COST.md` | AWS service cost estimates, spend tactics, hibernation/destroy cost comparison |
+| `COMPLETION.md` | Demonstrator vs. production: what's built, what's missing, and what a real project must add |
 | `ORGANIZATIONAL_STRUCTURE.md` | Organizational roles, responsibilities, and reporting relationships |
 | `KNOWLEDGE_CHECKS.md` | Learning verification questions for team training |
 
