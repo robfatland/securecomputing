@@ -392,15 +392,30 @@ cdk destroy --all
 # Verify blank slate
 aws cloudformation list-stacks \
   --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE \
-  --query 'StackSummaries[?contains(StackName, `SecureComputing`)]'
+  --query 'StackSummaries[?contains(StackName, `SecureComputing`)]' \
+  --output table
 # Should return empty
 
 aws s3 ls | grep securecomputing
 # Should return nothing
 
-# Rebuild from scratch: repeat steps 2–7 above
+aws ec2 describe-instances \
+  --filters "Name=tag:project,Values=securecomputing" \
+  --query 'Reservations[].Instances[].[InstanceId,State.Name]' \
+  --output table
+# Should return empty (or all "terminated")
+
+aws kms list-aliases \
+  --query 'Aliases[?contains(AliasName, `securecomputing`)]' \
+  --output table
+# Should show "pending deletion" or return empty
+
+# If all checks pass: blank slate confirmed.
+# Rebuild from scratch: repeat steps 2–7 above.
 # (Step 2 bootstrap can be skipped if CDKToolkit stack still exists)
 ```
+
+> ✅ **Blank slate verified May 18, 2026.** DESTROY completed with no errors; all verification checks returned empty. System can be rebuilt from documentation.
 
 The rebuild should produce an identical working system. The only variable is the bucket name (auto-generated, different each deploy).
 

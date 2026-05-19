@@ -896,6 +896,8 @@ The BAA does not make AWS services automatically compliant. It means:
 ### Black Hat Test (Phase 4)
 - [ ] Design breach simulation: (a) trusted insider permitted access, (b) unauthorized access attempt
 - [ ] Demonstrate detection, logging, alerting, and incident response workflow
+- [ ] **Gatekeeper failure tests:** Deliberately include PHI (MRN, patient name, SSN) in a Bedrock query to verify Comprehend Medical triggers the block. Test with varying confidence levels. Verify the block is logged, the researcher is notified, and the prompt never reaches Bedrock.
+- [ ] **Additional failure scenarios:** Attempt S3 access from unauthorized role; attempt to disable CloudTrail; attempt to access audit bucket from production role; attempt outbound connection to blocked service. Verify each is denied and logged.
 
 ### Future Items
 - [ ] Phase 2 IaC skeleton (Terraform/CloudFormation)
