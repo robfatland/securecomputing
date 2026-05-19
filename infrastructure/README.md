@@ -417,3 +417,105 @@ The rebuild should produce an identical working system. The only variable is the
 | Google reachable from EC2 (should be blocked) | Security group had `any_ipv4()` on port 443 (S3 fallback rule) | Removed; S3 uses prefix list rule instead |
 | `aws s3 ls` hangs from EC2 | Security group blocked S3 Gateway Endpoint traffic | Added egress rule for S3 prefix list `pl-68a54001` |
 | PostgreSQL version enum | `VER_16_4` not recognized | Use `VER_16` (CDK resolves to latest available) |
+
+---
+
+## Researcher Access: IDE and Notebooks
+
+Researchers access their EC2 instances via SSM port forwarding — no public IP, no SSH keys, no inbound firewall rules. The browser on the researcher's laptop connects to `localhost` which tunnels through SSM to the EC2.
+
+### VS Code Server (code-server)
+
+**One-time setup on the EC2 (via SSM session):**
+
+```bash
+aws ssm start-session --target INSTANCE_ID
+
+# Inside EC2:
+curl -fsSL https://code-server.dev/install.sh | sh
+# Start with a password (or use --auth none for development)
+code-server --bind-addr 0.0.0.0:8080 --auth password
+# Set password when prompted, then Ctrl+C (we'll run it as a service below)
+
+# Run as background service:
+sudo systemctl enable --now code-server@$USER
+# Edit config to set port and auth:
+mkdir -p ~/.config/code-server
+cat > ~/.config/code-server/config.yaml << 'EOF'
+bind-addr: 0.0.0.0:8080
+auth: password
+password: CHOOSE_A_PASSWORD
+cert: false
+EOF
+sudo systemctl restart code-server@$USER
+```
+
+**To connect (from your laptop):**
+
+```bash
+# Terminal 1: start port forward
+aws ssm start-session --target INSTANCE_ID \
+  --document-name AWS-StartPortForwardingSession \
+  --parameters '{"portNumber":["8080"],"localPortNumber":["8080"]}'
+
+# Terminal 2 (or browser): open http://localhost:8080
+# Enter the password you set above
+```
+
+You now have VS Code in your browser, running on the EC2, with access to all project data.
+
+### Jupyter Lab
+
+**One-time setup on the EC2:**
+
+```bash
+aws ssm start-session --target INSTANCE_ID
+
+# Inside EC2:
+pip install jupyterlab
+jupyter lab --generate-config
+# Set a password:
+jupyter lab password
+
+# Start Jupyter (background):
+nohup jupyter lab --no-browser --port 8888 --ip 0.0.0.0 &
+```
+
+**To connect (from your laptop):**
+
+```bash
+# Terminal 1: start port forward
+aws ssm start-session --target INSTANCE_ID \
+  --document-name AWS-StartPortForwardingSession \
+  --parameters '{"portNumber":["8888"],"localPortNumber":["8888"]}'
+
+# Browser: open http://localhost:8888
+# Enter the password you set
+```
+
+### Access Pattern Summary
+
+```
+Researcher laptop
+├── Terminal: aws ssm start-session (port forward)
+└── Browser: http://localhost:8080 (VS Code) or :8888 (Jupyter)
+        │
+        ▼ (SSM tunnel — encrypted, authenticated, no public IP)
+EC2 instance (private subnet)
+├── code-server on port 8080
+├── jupyter lab on port 8888
+├── EFS mounted (shared files)
+└── Access to S3, RDS, Bedrock via VPC endpoints
+```
+
+### Team Authentication (Production)
+
+For the demonstrator (single user, IAM keys): `aws ssm start-session` uses your local access key.
+
+For a real team (multiple researchers): Use IAM Identity Center (SSO):
+1. Each researcher runs `aws sso login --profile securecomputing`
+2. Gets temporary credentials (expire in 8 hours)
+3. Runs `aws ssm start-session --target THEIR_INSTANCE_ID`
+4. No long-lived keys on anyone's laptop
+
+Each researcher connects only to their own instance (enforced by IAM policy scoping `ssm:StartSession` to instances tagged with their name).
