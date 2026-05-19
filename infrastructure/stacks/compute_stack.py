@@ -30,6 +30,8 @@ class ComputeStack(Stack):
                  destroy_mode: bool = True,
                  vpc: ec2.Vpc = None,
                  infra_key: kms.Key = None,
+                 data_bucket=None,
+                 phi_data_key=None,
                  **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -44,6 +46,13 @@ class ComputeStack(Stack):
                 ),
             ],
         )
+
+        # Grant S3 read/write on data bucket
+        if data_bucket:
+            data_bucket.grant_read_write(self.ide_role)
+        # Grant KMS decrypt on PHI data key (researchers need to read encrypted data)
+        if phi_data_key:
+            phi_data_key.grant_encrypt_decrypt(self.ide_role)
 
         # Security group for IDE instances
         self.ide_sg = ec2.SecurityGroup(self, "IDESecurityGroup",
@@ -60,7 +69,12 @@ class ComputeStack(Stack):
             "HTTPS to VPC endpoints",
         )
 
-        # Outbound: S3 uses Gateway Endpoint (route table based, no SG rule needed)
+        # Outbound: S3 Gateway Endpoint (uses prefix list for routing)
+        self.ide_sg.add_egress_rule(
+            ec2.Peer.prefix_list("pl-68a54001"),
+            ec2.Port.tcp(443),
+            "HTTPS to S3 via Gateway Endpoint",
+        )
 
         # Outbound: allow HTTPS to GitHub IPs (via NAT)
         # GitHub publishes IPs at https://api.github.com/meta

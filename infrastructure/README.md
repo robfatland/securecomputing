@@ -260,3 +260,160 @@ See `COST.md` for detailed breakdown.
 | `ops/wake.sh` | Restart compute; recreate endpoints if deleted |
 | `ops/destroy.sh` | `cdk destroy --all` + verification script |
 | `ops/verify_blank_slate.py` | Enumerate remaining resources; alert on orphans |
+
+---
+
+## Full Build Procedure (tested May 2026)
+
+This is the complete sequence from blank AWS account to working system with data uploaded. Follow in order.
+
+### 1. Prerequisites
+
+```bash
+# CDK CLI
+sudo apt install nodejs npm
+npm install -g aws-cdk
+
+# Python dependencies
+cd ~/securecomputing/infrastructure
+pip install -r requirements.txt
+
+# AWS credentials pointing to correct account (see credential setup above)
+aws sts get-caller-identity
+# Must show the target account ID
+```
+
+### 2. Bootstrap CDK (one-time per account)
+
+```bash
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+cdk bootstrap aws://$ACCOUNT_ID/us-west-2
+```
+
+### 3. Deploy all stacks
+
+```bash
+cd ~/securecomputing/infrastructure
+cdk deploy --all --require-approval broadening
+```
+
+Prompts for approval on security changes (answer `y`). Takes ~10 minutes total. All 5 stacks must show ✅.
+
+### 4. Verify deployment
+
+```bash
+# Find the data bucket name
+aws s3 ls | grep securecomputing-storage
+# Note the bucket name (auto-generated, e.g., securecomputing-storage-databuckete3889a50-xxxxx)
+
+# Find instance IDs
+aws ec2 describe-instances \
+  --filters "Name=tag:project,Values=securecomputing" "Name=instance-state-name,Values=running" \
+  --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`researcher`].Value|[0]]' \
+  --output table
+```
+
+### 5. Verify EC2 connectivity
+
+```bash
+# Install SSM plugin (one-time)
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+sudo dpkg -i session-manager-plugin.deb
+rm session-manager-plugin.deb
+
+# Connect to an instance
+aws ssm start-session --target INSTANCE_ID
+
+# Inside EC2 — verify network controls:
+curl -s -o /dev/null -w "%{http_code}" --max-time 5 https://www.google.com
+# Should show "000" (blocked)
+
+curl -s -o /dev/null -w "%{http_code}" --max-time 5 https://github.com
+# Should show "200" or "301" (allowed)
+
+exit
+```
+
+### 6. Upload synthetic data
+
+Requires data to have been generated first (see `securecomputing-datagen/BUILD.md`).
+
+```bash
+# Set bucket name (from step 4)
+BUCKET=$(aws s3 ls | grep securecomputing-storage | awk '{print $3}')
+echo "Uploading to: $BUCKET"
+
+# Upload all datasets (~896 MB, takes a few minutes)
+aws s3 cp ~/securecomputing-data/pd0/ s3://$BUCKET/landing/pd0/ --recursive
+aws s3 cp ~/securecomputing-data/pd1/ s3://$BUCKET/landing/pd1/ --recursive
+aws s3 cp ~/securecomputing-data/pd2/ s3://$BUCKET/landing/pd2/ --recursive
+aws s3 cp ~/securecomputing-data/pd3/ s3://$BUCKET/landing/pd3/ --recursive
+aws s3 cp ~/securecomputing-data/manifest.json s3://$BUCKET/landing/manifest.json
+
+# Verify
+aws s3 ls s3://$BUCKET/landing/ --summarize --recursive | tail -3
+```
+
+### 7. Verify data accessible from EC2
+
+```bash
+aws ssm start-session --target INSTANCE_ID
+
+# Inside EC2:
+export AWS_DEFAULT_REGION=us-west-2
+aws s3 ls s3://BUCKET_NAME/landing/
+# Should list pd0/, pd1/, pd2/, pd3/, manifest.json
+
+exit
+```
+
+### 8. System is operational
+
+At this point:
+- ✅ Infrastructure deployed (VPC, KMS, S3, RDS, EFS, EC2, monitoring)
+- ✅ Network controls verified (GitHub allowed, general internet blocked)
+- ✅ Data uploaded and accessible from research compute
+- ✅ Auto-start/stop scheduled (6AM–6PM Pacific, Mon–Fri)
+- ✅ CloudTrail logging all API calls
+- ✅ GuardDuty monitoring for threats
+
+---
+
+## Destroy and Rebuild Test
+
+To verify the Blank Slate Rule:
+
+```bash
+# Destroy everything
+cd ~/securecomputing/infrastructure
+cdk destroy --all
+# Answer 'y' to each stack
+
+# Verify blank slate
+aws cloudformation list-stacks \
+  --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE \
+  --query 'StackSummaries[?contains(StackName, `SecureComputing`)]'
+# Should return empty
+
+aws s3 ls | grep securecomputing
+# Should return nothing
+
+# Rebuild from scratch: repeat steps 2–7 above
+# (Step 2 bootstrap can be skipped if CDKToolkit stack still exists)
+```
+
+The rebuild should produce an identical working system. The only variable is the bucket name (auto-generated, different each deploy).
+
+---
+
+## Known Issues and Fixes Applied
+
+| Issue | Root Cause | Fix |
+|-------|-----------|-----|
+| `cdk synth` fails: "must configure PUBLIC subnets for NAT" | CDK requires a public subnet to place NAT Gateway | Added minimal /28 public subnet |
+| `cdk synth` fails: "oneZone availabilityZones undefined" | EFS One-Zone needs explicit AZ | Added `availability_zones=[vpc.availability_zones[0]]` |
+| `cdk synth` fails: "encryption_key unexpected argument" | CDK API doesn't support `encryption_key` on `BlockDeviceVolume.ebs()` | Removed; use account default encryption |
+| RDS deploy fails: "Cannot find version 16.4" | Specific minor version not available in us-west-2 | Changed to `VER_16` (latest 16.x) |
+| Google reachable from EC2 (should be blocked) | Security group had `any_ipv4()` on port 443 (S3 fallback rule) | Removed; S3 uses prefix list rule instead |
+| `aws s3 ls` hangs from EC2 | Security group blocked S3 Gateway Endpoint traffic | Added egress rule for S3 prefix list `pl-68a54001` |
+| PostgreSQL version enum | `VER_16_4` not recognized | Use `VER_16` (CDK resolves to latest available) |

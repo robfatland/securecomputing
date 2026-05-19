@@ -145,7 +145,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-west-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-west-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2/54c89e55a5fc3649a0cf13985f9ec943fadb93222bf9ab2d3ea698082d9ef44e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-west-2/819fc8a810078b182740f90055a6713f0c49bdb50d87c4a7c737b11b9f5403e6.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -158,6 +158,8 @@
         }
       },
       "dependencies": [
+        "SecureComputing-Storage",
+        "SecureComputing-KMS",
         "SecureComputing-VPC",
         "SecureComputing-Compute.assets"
       ],

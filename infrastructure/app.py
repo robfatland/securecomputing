@@ -69,6 +69,8 @@ compute_stack = ComputeStack(app, "SecureComputing-Compute",
     destroy_mode=DESTROY_MODE,
     vpc=vpc_stack.vpc,
     infra_key=kms_stack.infra_key,
+    data_bucket=storage_stack.data_bucket,
+    phi_data_key=kms_stack.phi_data_key,
 )
 
 # 5. Monitoring (CloudTrail, GuardDuty, Config)

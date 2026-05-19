@@ -48,6 +48,81 @@
     "aws:cdk:path": "SecureComputing-Compute/IDEInstanceRole/Resource"
    }
   },
+  "IDEInstanceRoleDefaultPolicyA29C98DA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "SecureComputing-Storage:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "SecureComputing-Storage:ExportsOutputFnGetAttDataBucketE3889A50Arn98F8399F"
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+       }
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::ImportValue": "SecureComputing-KMS:ExportsOutputFnGetAttPhiDataKeyA91F21D0Arn7CD07AD8"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "IDEInstanceRoleDefaultPolicyA29C98DA",
+    "Roles": [
+     {
+      "Ref": "IDEInstanceRole348A15AF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDEInstanceRole/DefaultPolicy/Resource"
+   }
+  },
   "IDESecurityGroup1DF03256": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
@@ -201,6 +276,25 @@
     "aws:cdk:path": "SecureComputing-Compute/IDESecurityGroup/Resource"
    }
   },
+  "IDESecurityGrouptopl68a54001443B46BBD0B": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "HTTPS to S3 via Gateway Endpoint",
+    "DestinationPrefixListId": "pl-68a54001",
+    "FromPort": 443,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "IDESecurityGroup1DF03256",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "ToPort": 443
+   },
+   "Metadata": {
+    "aws:cdk:path": "SecureComputing-Compute/IDESecurityGroup/to pl-68a54001:443"
+   }
+  },
   "IDEpiInstanceProfile204D04E9": {
    "Type": "AWS::IAM::InstanceProfile",
    "Properties": {
@@ -275,6 +369,7 @@
     }
    },
    "DependsOn": [
+    "IDEInstanceRoleDefaultPolicyA29C98DA",
     "IDEInstanceRole348A15AF"
    ],
    "Metadata": {
@@ -355,6 +450,7 @@
     }
    },
    "DependsOn": [
+    "IDEInstanceRoleDefaultPolicyA29C98DA",
     "IDEInstanceRole348A15AF"
    ],
    "Metadata": {
@@ -435,6 +531,7 @@
     }
    },
    "DependsOn": [
+    "IDEInstanceRoleDefaultPolicyA29C98DA",
     "IDEInstanceRole348A15AF"
    ],
    "Metadata": {
@@ -515,6 +612,7 @@
     }
    },
    "DependsOn": [
+    "IDEInstanceRoleDefaultPolicyA29C98DA",
     "IDEInstanceRole348A15AF"
    ],
    "Metadata": {
@@ -595,6 +693,7 @@
     }
    },
    "DependsOn": [
+    "IDEInstanceRoleDefaultPolicyA29C98DA",
     "IDEInstanceRole348A15AF"
    ],
    "Metadata": {
@@ -675,6 +774,7 @@
     }
    },
    "DependsOn": [
+    "IDEInstanceRoleDefaultPolicyA29C98DA",
     "IDEInstanceRole348A15AF"
    ],
    "Metadata": {
@@ -930,7 +1030,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOXQ6CMBCEz8J7qQp4AhONbw0ewJSyxBXamv5oSNO724ok+jSzM5tvt6LVvqHbgr9sKfqxnLCj4eK4GEmKrgG5pKHVE5DDoFY9K+u4EsCMHjBFTE8o5twsLhIQVcKA8AbdfDLaP3L7H6yUX2IkE5ddz2k4eiUcapXbX8/ASLQ2TenKE5Sz6T///S9pjJ8tbrgEB4a0YLU3mcxmd9NqU9NdTZvibhFL45VDCbRd9A20mzXsDQEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31OSQ7CMAx8C/c0QFtegABxq8oDUEhdMGRBdgKqqv6dlEVw4jSLR+PJZb4o5Wyi7pzp5pIZPMh+F5S+iGTte1RW9rU3IJate2LlDepulF+2dRyU01CRb9HAIEDnqQZ0JAzdhny8jrH/xupIwCw+Xb+9gzDKHhol+3V0OqB34/WXV0AWmZNKz2/gAqfZ8T074TA8U4qUhQAkamAfaWyuunDyblrIeSHLyZkRM4ouoAVZv/AB8SxlgCQBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "SecureComputing-Compute/CDKMetadata/Default"

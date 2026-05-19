@@ -3,11 +3,11 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     },
@@ -38,11 +38,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -56,12 +56,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/tmp/tmpltxy8yq2/lib/program.js:1:543 (/tmp/tmpltxy8yq2/lib/program.js:1:5434)",
-        "Kernel._Kernel_ensureSync (/tmp/tmpltxy8yq2/lib/program.js:1:69992)",
-        "Kernel.invoke (/tmp/tmpltxy8yq2/lib/program.js:1:54294)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "/tmp/tmp7_b1sox7/lib/program.js:1:543 (/tmp/tmp7_b1sox7/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmp7_b1sox7/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmp7_b1sox7/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -75,12 +75,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/tmp/tmpltxy8yq2/lib/program.js:1:543 (/tmp/tmpltxy8yq2/lib/program.js:1:5434)",
-        "Kernel._Kernel_ensureSync (/tmp/tmpltxy8yq2/lib/program.js:1:69992)",
-        "Kernel.invoke (/tmp/tmpltxy8yq2/lib/program.js:1:54294)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "/tmp/tmp7_b1sox7/lib/program.js:1:543 (/tmp/tmp7_b1sox7/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmp7_b1sox7/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmp7_b1sox7/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -94,11 +94,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Role2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -112,11 +112,30 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new SecurityGroup2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Compute/IDESecurityGroup/to pl-68a54001:443": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IDESecurityGrouptopl68a54001443B46BBD0B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "/tmp/tmp7_b1sox7/lib/program.js:1:543 (/tmp/tmp7_b1sox7/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmp7_b1sox7/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmp7_b1sox7/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -130,11 +149,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -148,11 +167,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -166,11 +185,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -184,11 +203,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -202,11 +221,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -220,11 +239,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -238,11 +257,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -256,11 +275,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -274,11 +293,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -292,11 +311,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -310,11 +329,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -328,11 +347,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Instance2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -346,11 +365,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -364,11 +383,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Rule2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -382,11 +401,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Rule2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -400,11 +419,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Rule2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -418,11 +437,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Rule2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -436,12 +455,31 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "/tmp/tmpltxy8yq2/lib/program.js:1:543 (/tmp/tmpltxy8yq2/lib/program.js:1:5434)",
-        "Kernel._Kernel_ensureSync (/tmp/tmpltxy8yq2/lib/program.js:1:69992)",
-        "Kernel.invoke (/tmp/tmpltxy8yq2/lib/program.js:1:54294)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "/tmp/tmp7_b1sox7/lib/program.js:1:543 (/tmp/tmp7_b1sox7/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmp7_b1sox7/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmp7_b1sox7/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SecureComputing-Compute/IDEInstanceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IDEInstanceRoleDefaultPolicyA29C98DA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.grantReadWrite in aws-cdk-lib...",
+        "/tmp/tmp7_b1sox7/lib/program.js:1:543 (/tmp/tmp7_b1sox7/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmp7_b1sox7/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmp7_b1sox7/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -455,11 +493,11 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "Kernel._Kernel_create (/tmp/tmpltxy8yq2/lib/program.js:1:61273)",
-        "Kernel.create (/tmp/tmpltxy8yq2/lib/program.js:1:52004)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "Kernel._Kernel_create (/tmp/tmp7_b1sox7/lib/program.js:1:61273)",
+        "Kernel.create (/tmp/tmp7_b1sox7/lib/program.js:1:52004)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
@@ -473,12 +511,12 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
-        "/tmp/tmpltxy8yq2/lib/program.js:1:543 (/tmp/tmpltxy8yq2/lib/program.js:1:5434)",
-        "Kernel._Kernel_ensureSync (/tmp/tmpltxy8yq2/lib/program.js:1:69992)",
-        "Kernel.invoke (/tmp/tmpltxy8yq2/lib/program.js:1:54294)",
-        "KernelHost.processRequest (/tmp/tmpltxy8yq2/lib/program.js:1:212888)",
-        "KernelHost.run (/tmp/tmpltxy8yq2/lib/program.js:1:211943)",
-        "Immediate._onImmediate (/tmp/tmpltxy8yq2/lib/program.js:1:211987)",
+        "/tmp/tmp7_b1sox7/lib/program.js:1:543 (/tmp/tmp7_b1sox7/lib/program.js:1:5434)",
+        "Kernel._Kernel_ensureSync (/tmp/tmp7_b1sox7/lib/program.js:1:69992)",
+        "Kernel.invoke (/tmp/tmp7_b1sox7/lib/program.js:1:54294)",
+        "KernelHost.processRequest (/tmp/tmp7_b1sox7/lib/program.js:1:212888)",
+        "KernelHost.run (/tmp/tmp7_b1sox7/lib/program.js:1:211943)",
+        "Immediate._onImmediate (/tmp/tmp7_b1sox7/lib/program.js:1:211987)",
         "...node internals..."
       ]
     }
