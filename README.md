@@ -15,23 +15,30 @@ All markdown files can be consolidated into a single PDF using Pandoc:
 ```bash
 sudo apt update
 sudo apt install pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-xetex
+npm install --global @mermaid-js/mermaid-cli mermaid-filter
 ```
 
 ### Generate PDF
 
 ```bash
-pandoc --toc --toc-depth=2 -V geometry:margin=1in --pdf-engine=xelatex \
+pandoc --toc --toc-depth=2 -V geometry:margin=1in \
+  -V mainfont="DejaVu Sans" -V monofont="DejaVu Sans Mono" \
+  --pdf-engine=xelatex \
+  --lua-filter=strip-emoji.lua \
+  -F mermaid-filter \
   PROJECT_OVERVIEW.md \
   ARCHITECTURE.md \
   GATES.md \
   PHASE0_CHARTER.md \
   RISK_ASSESSMENT.md \
+  COST.md \
   POLICY_AI_ACCEPTABLE_USE.md \
   POLICY_SUITE.md \
   SYNTHETIC_DATA.md \
   NISTDocs.md \
   ORGANIZATIONAL_STRUCTURE.md \
   KNOWLEDGE_CHECKS.md \
+  COMPLETION.md \
   -o SecureComputing_Book.pdf
 ```
 
@@ -42,11 +49,14 @@ This produces a ~100-page PDF with auto-generated table of contents. Requires ~5
 ```bash
 sudo apt install pandoc
 pandoc --toc --toc-depth=2 --standalone \
+  --lua-filter=strip-emoji.lua \
+  -F mermaid-filter \
   PROJECT_OVERVIEW.md ARCHITECTURE.md GATES.md \
-  PHASE0_CHARTER.md RISK_ASSESSMENT.md \
+  PHASE0_CHARTER.md RISK_ASSESSMENT.md COST.md \
   POLICY_AI_ACCEPTABLE_USE.md POLICY_SUITE.md \
   SYNTHETIC_DATA.md NISTDocs.md \
   ORGANIZATIONAL_STRUCTURE.md KNOWLEDGE_CHECKS.md \
+  COMPLETION.md \
   -o SecureComputing_Book.html
 ```
 
