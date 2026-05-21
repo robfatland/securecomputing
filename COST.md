@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: COST.md -->
+
 # Cost Management
 
 This document tracks AWS service costs for the project infrastructure. The system is built in **DESTROY mode** (development/synthetic) — no Object Lock, no MFA Delete, 7-day KMS deletion, no multi-AZ redundancy. This enables clean tear-down and minimizes spend.

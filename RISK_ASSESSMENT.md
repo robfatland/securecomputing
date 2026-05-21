@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: RISK_ASSESSMENT.md -->
+
 # Risk Assessment
 
 > ⚠️ **TEMPLATE:** This risk assessment is a demonstrator example. You are responsible for modifying this to be accurate to your program. Threat scenarios, likelihood scores, and mitigations must be reviewed against your actual institutional context, threat landscape, and risk tolerance.

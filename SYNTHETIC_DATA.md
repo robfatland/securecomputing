@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: SYNTHETIC_DATA.md -->
+
 # Synthetic Data Overview
 
 This document describes the synthetic datasets generated for the securecomputing project. All data is entirely fabricated — no real patient information is represented. The data is designed to exercise the full compliance infrastructure (upload path, encryption, access controls, audit logging, gatekeeper) while providing realistic structure for research workflow demonstrations.

@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: GATES.md -->
+
 # Gate Registry
 
 ## What is a Gate?

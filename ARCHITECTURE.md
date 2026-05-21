@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: ARCHITECTURE.md -->
+
 # Technical Architecture
 
 This document describes the technical architecture of the Synthetic PHI Research Environment on AWS: services used, network design, compute model, data flows, AI integration, and security controls.

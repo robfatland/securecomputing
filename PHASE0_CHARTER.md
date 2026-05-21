@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: PHASE0_CHARTER.md -->
+
 # Phase 0 Deliverable: Project Charter
 
 > ⚠️ **TEMPLATE:** This charter is a demonstrator example built for a synthetic PHI project. You are responsible for modifying this to be accurate to your program. Replace all bracketed placeholders with institution-specific details. Sections marked with 📋 use generic language that must be replaced with verified, institution-specific content.

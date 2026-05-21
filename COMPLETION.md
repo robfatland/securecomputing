@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: COMPLETION.md -->
+
 # Demonstrator vs. Production: Completion Steps
 
 This document describes what the demonstrator system builds, what it deliberately omits, and what a real project must add.
@@ -30,26 +34,107 @@ This demonstrator does not function as a complete build template. Each PHI proje
 
 ---
 
-## Demonstrator vs. Production: Feature Comparison
+## Synthetic Prototype vs. Operational System: Feature Comparison
 
-| Feature | Demonstrator (DESTROY mode) | Production (DECOMMISSION mode) | Gap |
-|---------|---------------------------|-------------------------------|-----|
-| S3 Object Lock | ❌ Not applied | ✅ Required on audit bucket | Must implement |
-| MFA Delete | ❌ Not enabled | ✅ Required on audit bucket | Must implement |
+### Storage & Encryption
+
+| Feature | Synthetic Prototype | Operational System | Gap |
+|---------|--------------------|--------------------|-----|
+| S3 Object Lock | Not applied | Required on audit bucket | Must implement |
+| MFA Delete | Not enabled | Required on audit bucket | Must implement |
 | KMS deletion wait | 7 days (minimum) | 30 days (maximum safety) | Config change only |
-| RDS final snapshot | ❌ Skipped | ✅ Retained before deletion | Config change only |
-| Multi-AZ (RDS, EFS) | ❌ Single-AZ (cheap) | ✅ Multi-AZ (resilient) | Config change + cost |
+| RDS final snapshot | Skipped | Retained before deletion | Config change only |
+| Multi-AZ (RDS, EFS) | Single-AZ (cost savings) | Multi-AZ (resilience) | Config change + cost |
 | Audit log retention | Deleted with everything | 6–7 years (Glacier lifecycle) | Must implement lifecycle rules |
-| Glacier transition | ❌ Not configured | ✅ Standard → Glacier at 90 days | Must implement |
-| DECOMMISSION script | ❌ Not written | ✅ Orchestrates PHI destruction → infra teardown → audit retention | Must write and test |
-| IAM key policies (deny IT decrypt) | Documented but not enforced in CDK | ✅ Explicit deny statements in key policies | Must implement |
-| Gatekeeper Lambda | Designed but not deployed as working code | ✅ Deployed, tested, fail-closed verified | Must build |
-| SSO federation | Not configured (using IAM User keys) | ✅ UW SSO → AWS IAM Identity Center | Institutional dependency |
-| SCP enforcement | Documented as UW IT responsibility | ✅ Verified against actual SCPs | Institutional dependency |
-| Macie (PHI discovery) | ❌ Deferred for cost | ✅ Enabled, scanning all buckets | Enable + configure |
-| DocumentDB | ❌ Not deployed (cost) | ✅ Deployed for patient document views | Add to CDK + cost |
-| Incident response drill | Designed (Black Hat Test) | ✅ Executed and documented | Must perform |
-| HIPAA training | Approach documented | ✅ All personnel trained with certificates | Must procure and complete |
+| Glacier transition | Not configured | Standard → Glacier at 90 days | Must implement |
+
+### Security & Access Control
+
+| Feature | Synthetic Prototype | Operational System | Gap |
+|---------|--------------------|--------------------|-----|
+| IAM key policies (deny IT decrypt) | Documented, not enforced in CDK | Explicit deny statements in key policies | Must implement |
+| SSO federation | Not configured (IAM User keys) | UW SSO → AWS IAM Identity Center | Institutional dependency |
+| SCP enforcement | Documented as UW IT responsibility | Verified against actual SCPs | Institutional dependency |
+
+### Services & Tooling
+
+| Feature | Synthetic Prototype | Operational System | Gap |
+|---------|--------------------|--------------------|-----|
+| Gatekeeper Lambda | Designed, not deployed | Deployed, tested, fail-closed verified | Must build |
+| Macie (PHI discovery) | Deferred for cost | Enabled, scanning all buckets | Enable + configure |
+| DocumentDB | Not deployed (cost) | Deployed for patient document views | Add to CDK + cost |
+| DECOMMISSION script | Not written | Orchestrates PHI destruction → infra teardown → audit retention | Must write and test |
+
+### Organizational
+
+| Feature | Synthetic Prototype | Operational System | Gap |
+|---------|--------------------|--------------------|-----|
+| Incident response drill | Designed (Black Hat Test) | Executed and documented | Must perform |
+| HIPAA training | Approach documented | All personnel trained with certificates | Must procure and complete |
+
+---
+
+## Adapting the Synthetic Prototype
+
+The Synthetic Prototype (SP) is a reference architecture — not a fill-in-the-blanks template. Transitioning to an Operational System (OS) requires a structured discovery process that captures the specific requirements of the real research program and maps them to IaC modifications.
+
+### The Adaptation Process
+
+The SP was built through a question-and-answer interview process between the PI and an AI assistant. The same approach applies when adapting it for a real project: a series of structured conversations that progressively narrow the design space from generic to specific.
+
+**Who participates:**
+- Principal Investigator (research requirements, data types, team composition)
+- IT/Infrastructure staff (institutional constraints, existing services, network policies)
+- Compliance/Privacy officer (regulatory requirements, institutional policies, BAA status)
+- Budget authority (cost constraints, funding timeline)
+
+**What the interviews produce:**
+- A modified architecture document reflecting the real project's needs
+- Revised CDK parameters (instance types, service selection, team size, storage estimates)
+- A cost estimate derived from the adapted design (not from the SP's synthetic workload)
+
+### Interview Topics
+
+The following areas require project-specific answers before the SP can become an OS:
+
+| Topic | SP Assumption | Questions for the Real Project |
+|-------|---------------|-------------------------------|
+| Team size | 7 people (PI, Postdoc, Co-PI, 3 students, IT) | How many researchers? What roles? Will the team grow? |
+| Data volume | 896 MB synthetic | How much real data? Growth rate? Imaging? Genomics at scale? |
+| Data types | EHR (OMOP), crystallography (CIF), genomics (VCF), labs (CSV) | What modalities? What formats? What ingest frequency? |
+| Compute needs | t3.medium IDE instances | GPU workloads? ML training? Large-memory analysis? |
+| AI services | Bedrock (Claude) + Comprehend Medical | Which foundation models? Fine-tuning? Custom endpoints? |
+| Availability | Business hours only (auto-start/stop) | 24/7 access needed? Weekend work? Multi-timezone team? |
+| Collaboration | Single VPC, shared EFS | Multi-site? Cross-institution data sharing? Federated analysis? |
+| Data source | Generated locally (securecomputing-datagen) | Hospital EHR extract? Registry data? External biobank? |
+| Retention | None (DESTROY mode) | IRB-mandated retention period? Funding agency requirements? |
+| Institutional SSO | Not configured | Which identity provider? SAML? OIDC? Existing AWS Organization? |
+| Network policy | NAT restricted to GitHub only | Other external services needed? Package repositories? Data APIs? |
+| Budget | ~$400/month active, ~$100/month hibernated | Hard budget cap? Funding period? Cost approval workflow? |
+
+### From Answers to IaC
+
+Interview answers map directly to CDK parameters and architectural decisions:
+
+1. **Team size → EC2 instance count, IAM role definitions, KMS key policy grants**
+2. **Data volume → S3 storage class selection, EFS throughput mode, RDS instance size**
+3. **Compute needs → Instance family/size, GPU instances, SageMaker configuration**
+4. **Availability → EventBridge schedule rules, Multi-AZ decisions, auto-scaling**
+5. **Retention → S3 lifecycle policies, Object Lock configuration, Glacier transitions**
+6. **SSO → IAM Identity Center configuration, SAML provider setup, role mapping**
+
+### Producing the Cost Estimate
+
+Once the adapted design is complete, the cost estimate follows mechanically:
+
+1. List all AWS services in the revised architecture with their sizing
+2. Apply the pricing model for each (on-demand, reserved, savings plan)
+3. Factor in the operational schedule (hours/month active vs. hibernated)
+4. Add monitoring/logging overhead (CloudTrail data events, VPC Flow Logs, Config rules)
+5. Include one-time costs (training procurement, penetration testing, compliance review)
+6. Compare against budget constraints; iterate on design if needed
+
+The SP's `COST.md` provides the methodology and baseline numbers. The OS cost estimate replaces the SP's synthetic workload assumptions with real ones.
 
 ---
 

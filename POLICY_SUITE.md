@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: POLICY_SUITE.md -->
+
 # Policy Suite: HIPAA Security Rule Compliance
 
 > ⚠️ **TEMPLATE:** These policy outlines are demonstrator templates. Each policy below provides structure, required sections, and example language. You are responsible for modifying every policy to be accurate to your program. Your actual versions must be considerably more detailed and specific, reviewed by legal counsel, and approved by your designated Privacy/Security Officer.

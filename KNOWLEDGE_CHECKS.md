@@ -1,3 +1,7 @@
+\newpage
+
+<!-- SOURCE: KNOWLEDGE_CHECKS.md -->
+
 # Knowledge Checks: HIPAA Compliance & AWS Architecture
 
 This document contains a series of knowledge checks organized by topic. Some have been answered, others are pending your review and responses.
