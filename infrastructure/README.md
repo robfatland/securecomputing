@@ -95,7 +95,7 @@ Or pass explicitly:
 cdk deploy --all --profile securecomputing
 ```
 
-> 📋 **TEACHING NOTE:** IAM User access keys are long-lived credentials — if leaked, they grant persistent access until rotated. SSO tokens are short-lived (expire in hours). For a real PHI production system, SSO is strongly preferred. For a synthetic/development system with credit-based funding and no institutional SSO, IAM User keys are acceptable with the understanding that they should be rotated periodically and never committed to git.
+> [i] **TEACHING NOTE:** IAM User access keys are long-lived credentials — if leaked, they grant persistent access until rotated. SSO tokens are short-lived (expire in hours). For a real PHI production system, SSO is strongly preferred. For a synthetic/development system with credit-based funding and no institutional SSO, IAM User keys are acceptable with the understanding that they should be rotated periodically and never committed to git.
 
 ### Verify Credentials
 
@@ -213,7 +213,7 @@ aws cloudformation delete-stack --stack-name CDKToolkit
 
 **KMS keys:** After stack deletion, KMS keys enter "pending deletion" for 7 days. No action needed — they auto-delete. Verify at: KMS Console → Customer managed keys → should show "Pending deletion."
 
-> 📋 **TEACHING NOTE:** The ability to destroy infrastructure without the tools that created it is a resilience requirement. If your CDK environment is corrupted, your laptop is lost, or the AI assistant is discontinued — you can still clean up using only a browser and the AWS Console. CloudFormation tracks everything CDK created; you just delete the stacks.
+> [i] **TEACHING NOTE:** The ability to destroy infrastructure without the tools that created it is a resilience requirement. If your CDK environment is corrupted, your laptop is lost, or the AI assistant is discontinued — you can still clean up using only a browser and the AWS Console. CloudFormation tracks everything CDK created; you just delete the stacks.
 
 ### Check what's deployed
 
@@ -297,7 +297,7 @@ cd ~/securecomputing/infrastructure
 cdk deploy --all --require-approval broadening
 ```
 
-Prompts for approval on security changes (answer `y`). Takes ~10 minutes total. All 5 stacks must show ✅.
+Prompts for approval on security changes (answer `y`). Takes ~10 minutes total. All 5 stacks must show [x].
 
 ### 4. Verify deployment
 
@@ -370,12 +370,12 @@ exit
 ### 8. System is operational
 
 At this point:
-- ✅ Infrastructure deployed (VPC, KMS, S3, RDS, EFS, EC2, monitoring)
-- ✅ Network controls verified (GitHub allowed, general internet blocked)
-- ✅ Data uploaded and accessible from research compute
-- ✅ Auto-start/stop scheduled (6AM–6PM Pacific, Mon–Fri)
-- ✅ CloudTrail logging all API calls
-- ✅ GuardDuty monitoring for threats
+- [x] Infrastructure deployed (VPC, KMS, S3, RDS, EFS, EC2, monitoring)
+- [x] Network controls verified (GitHub allowed, general internet blocked)
+- [x] Data uploaded and accessible from research compute
+- [x] Auto-start/stop scheduled (6AM–6PM Pacific, Mon–Fri)
+- [x] CloudTrail logging all API calls
+- [x] GuardDuty monitoring for threats
 
 ---
 
@@ -415,7 +415,7 @@ aws kms list-aliases \
 # (Step 2 bootstrap can be skipped if CDKToolkit stack still exists)
 ```
 
-> ✅ **Blank slate verified May 18, 2026.** DESTROY completed with no errors; all verification checks returned empty. System can be rebuilt from documentation.
+> [x] **Blank slate verified May 18, 2026.** DESTROY completed with no errors; all verification checks returned empty. System can be rebuilt from documentation.
 
 The rebuild should produce an identical working system. The only variable is the bucket name (auto-generated, different each deploy).
 

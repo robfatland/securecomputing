@@ -70,7 +70,7 @@ One VCF file per patient containing synthetic genetic variants. VCF is the stand
 - Structurally valid VCF v4.3 format
 - Linked to patient via MRN in filename
 
-> 🔄 Full specification TBD. See `securecomputing-datagen/docs/DATA_DESIGN.md`.
+> [~] Full specification TBD. See `securecomputing-datagen/docs/DATA_DESIGN.md`.
 
 ---
 
@@ -90,7 +90,7 @@ Multiple lab visits per patient over the observation period. Includes standard c
 | Liver Function | ALT, AST, ALP, Bilirubin, Albumin |
 | HbA1c | Hemoglobin A1c (diabetes marker) |
 
-> 🔄 Full specification TBD. See `securecomputing-datagen/docs/DATA_DESIGN.md`.
+> [~] Full specification TBD. See `securecomputing-datagen/docs/DATA_DESIGN.md`.
 
 ---
 
@@ -103,7 +103,7 @@ OMOP provides the relational backbone that links all other datasets:
 - PD2 links via SPECIMEN (blood/tissue sample) + PROCEDURE_OCCURRENCE (sequencing)
 - PD3 links via MEASUREMENT (lab values also stored in OMOP standard format)
 
-> 🔄 Full specification in `securecomputing-datagen/docs/DATA_DESIGN.md`.
+> [~] Full specification in `securecomputing-datagen/docs/DATA_DESIGN.md`.
 
 ---
 

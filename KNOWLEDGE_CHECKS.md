@@ -10,7 +10,7 @@ This document contains a series of knowledge checks organized by topic. Some hav
 
 ---
 
-## Section 1: Audit & Accountability (ANSWERED ✓)
+## Section 1: Audit & Accountability (ANSWERED [x])
 
 ### Question 1.1: Separate Audit Account
 **Q: Why is the audit log stored in a separate AWS account, and what threat does that prevent?**
@@ -26,7 +26,7 @@ The audit log records API calls to the research account. A bad actor with resear
 
 ---
 
-## Section 2: Principle of Least Privilege (ANSWERED ✓)
+## Section 2: Principle of Least Privilege (ANSWERED [x])
 
 ### Question 2.1: Developer KMS Key Access
 **Q: Why would a Developer role NOT have access to KMS keys, even though they need to write code that processes encrypted data?**
@@ -217,10 +217,10 @@ When the PI's access expires after 90 days:
 
 4. **Compliance Review** (Shorter than initial approval):
    - Compliance Officer checks:
-     - ✓ IRB protocol still active?
-     - ✓ No access violations during past 90 days?
-     - ✓ PI still listed on protocol?
-     - ✓ Study objectives still align with approved scope?
+     - [x] IRB protocol still active?
+     - [x] No access violations during past 90 days?
+     - [x] PI still listed on protocol?
+     - [x] Study objectives still align with approved scope?
    - **Difference from new request**: No need for full risk assessment; just verify ongoing compliance
 
 5. **Approval & Provisioning**:

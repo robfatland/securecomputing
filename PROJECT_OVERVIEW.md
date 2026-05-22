@@ -1,6 +1,6 @@
 # Synthetic PHI Environment on AWS for Clinical Research (SPEACR)
 
-> **PDF generation:** `pandoc --toc --toc-depth=2 -V geometry:margin=1in --pdf-engine=xelatex PROJECT_OVERVIEW.md ARCHITECTURE.md GATES.md PHASE0_CHARTER.md RISK_ASSESSMENT.md POLICY_AI_ACCEPTABLE_USE.md POLICY_SUITE.md SYNTHETIC_DATA.md NISTDocs.md ORGANIZATIONAL_STRUCTURE.md KNOWLEDGE_CHECKS.md -o SecureComputing_Book.pdf` — see `README.md` for install instructions.
+> **PDF generation:** See `APPENDICES.md` for print instructions.
 
 ## Project Documents
 
@@ -150,9 +150,9 @@ The purpose of this project is to document a functional synthetic research compu
 
 This project produces documents intended as guidance for real projects. The following visual flags indicate sections that require customization:
 
-> ⚠️ **TEMPLATE:** This section is a demonstrator example. You are responsible for modifying this to be accurate to your program. Replace placeholder content with institution-specific details, verified procedures, and legally reviewed language.
+> [!] **TEMPLATE:** This section is a demonstrator example. You are responsible for modifying this to be accurate to your program. Replace placeholder content with institution-specific details, verified procedures, and legally reviewed language.
 
-> 📋 **GENERIC:** This content uses generic language (e.g., "sanctions range from retraining to removal"). Your actual version must be considerably more detailed and specific to your institutional policies and applicable regulations.
+> [i] **GENERIC:** This content uses generic language (e.g., "sanctions range from retraining to removal"). Your actual version must be considerably more detailed and specific to your institutional policies and applicable regulations.
 
 These markers appear throughout project documents wherever content is intentionally left at template level rather than fully specified.
 
@@ -1067,11 +1067,11 @@ The BAA does not make AWS services automatically compliant. It means:
 ## To Do List
 
 ### Immediate (Phase 0 Completion)
-- [x] **Q4:** FH collaborator relationship — Co-PI on NIH award, salary support, IRB-approved. ✓
-- [x] **Q5:** Team composition — PI, Co-PI (FH), 3 students, 1 postdoc, 1 IT staff (7 total). ✓
-- [x] **Q6:** Institutional infrastructure — CISO (no Privacy Officer), UW IT manages AWS accounts under BAA. ✓
-- [x] **Q11:** HIPAA training — purchase as service (CITI or equivalent); supplement with project-specific AI/PHI briefing. ✓
-- [x] **Q8:** Data preparation level — raw PHI (full identifiers). ✓
+- [x] **Q4:** FH collaborator relationship — Co-PI on NIH award, salary support, IRB-approved. [x]
+- [x] **Q5:** Team composition — PI, Co-PI (FH), 3 students, 1 postdoc, 1 IT staff (7 total). [x]
+- [x] **Q6:** Institutional infrastructure — CISO (no Privacy Officer), UW IT manages AWS accounts under BAA. [x]
+- [x] **Q11:** HIPAA training — purchase as service (CITI or equivalent); supplement with project-specific AI/PHI briefing. [x]
+- [x] **Q8:** Data preparation level — raw PHI (full identifiers). [x]
 - [x] Draft Phase 0 project charter document → See `PHASE0_CHARTER.md`
 - [x] Document raw PHI upload path security design → See `ARCHITECTURE.md`
 - [x] **Risk assessment accepted by Dr. D.R. Smith (PI)** — Gate G2 satisfied.
@@ -1089,8 +1089,8 @@ The BAA does not make AWS services automatically compliant. It means:
 - [ ] CITI Program institutional subscription? **Unclosed — required for Gate G3.**
 
 ### Design & Architecture
-- [x] AWS Services Registry → `ARCHITECTURE.md` ✓
-- [x] Researcher Environment Model → `ARCHITECTURE.md` ✓
+- [x] AWS Services Registry → `ARCHITECTURE.md` [x]
+- [x] Researcher Environment Model → `ARCHITECTURE.md` [x]
 - [ ] Comprehend Medical gatekeeper detailed design
 - [ ] Research environment compute architecture (EC2 sizing, IDE deployment)
 - [ ] AWS account request process (UW IT dependency)
@@ -1117,7 +1117,7 @@ The BAA does not make AWS services automatically compliant. It means:
 - [ ] **End-to-end Docker container pipeline demo:** Fully functional proof-of-concept. `Dockerfile` + `app.py` + `requirements.txt` in `securecomputing-datagen` → GitHub Actions builds image → pushes to ECR → ECS/Fargate runs container in the project environment. Demonstrates full CI/CD path from code to running container within the compliant infrastructure.
 - [ ] **SageMaker lifecycle configuration:** Build the shell script (in `securecomputing` repo) that installs project libraries (NetworkX, pandas, scikit-learn, etc.) at notebook instance creation. Store in repo, reference in CDK stack. Test that a fresh SageMaker instance comes up with the full research environment ready.
 - [ ] **Book assembly:** Evaluate tooling for stapling project Markdown files into a single document (PDF or HTML book). See note in PO.md.
-- [x] **Split PO.md** → `ARCHITECTURE.md` created ✓
+- [x] **Split PO.md** → `ARCHITECTURE.md` created [x]
 - [ ] **Reproducibility / "How to Construct":** AI-guided build from this repo's documentation
 - [ ] **Synthea Docker image:** Build a Synthea CSV-export Docker image (Java 17 + Synthea + CSV-configured properties) and push to Docker Hub with discoverable tags. Eliminates the Java/Gradle/WSL installation challenges for future users. Should also include the ETL-Synthea-Python tool with pandas 2.x compatibility patches pre-applied (the upstream repo uses deprecated `DataFrame.append()` which fails on modern pandas).
 - [ ] **Validation meta-task:** The synthetic system has an "answer key" (`patient_stones.csv`) that a real research program would not have. Design a validation exercise where derived results (from analyzing PD1 PXRD/FTIR data, PD2 genomics, PD3 lab correlations) are checked against the answer key. This tests the analysis pipeline's correctness — but note that this luxury does not exist in real research. Document this distinction as a teaching point about the difference between synthetic system validation and real-world discovery.

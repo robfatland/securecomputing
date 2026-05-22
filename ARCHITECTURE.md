@@ -353,7 +353,7 @@ External access:
 - GitHub is accessible from research compute (for git push/pull of code only); enforced via VPC endpoint or security group allowlist
 - **No general browser access from research environment** (conservative choice — eliminates clipboard-proximity risk between PHI and external services). Researchers use their laptops for web browsing, literature search, and external AI tools. See note below.
 
-> 📋 **DESIGN CHOICE:** No general internet from research compute is the conservative option presented here. An alternative is "policy-only" (allow browser access, rely on training and policy to prevent PHI leakage to external services). Policy-only is simpler to implement but carries greater risk — it depends entirely on human discipline and cannot be technically audited. The conservative choice simplifies network architecture and eliminates an entire class of accidental disclosure.
+> [i] **DESIGN CHOICE:** No general internet from research compute is the conservative option presented here. An alternative is "policy-only" (allow browser access, rely on training and policy to prevent PHI leakage to external services). Policy-only is simpler to implement but carries greater risk — it depends entirely on human discipline and cannot be technically audited. The conservative choice simplifies network architecture and eliminates an entire class of accidental disclosure.
 
 ---
 
@@ -450,7 +450,7 @@ This three-party confirmation (uploader → system → recipient) creates the au
 | **Production** | Project team (Dr. D.R. Smith, IT Staff) | PHI data, research compute, Bedrock, EFS, all research workloads |
 | **Audit** | Project team (Dr. D.R. Smith, IT Staff) | CloudTrail logs, Config history, compliance evidence, gatekeeper logs |
 
-> 📋 **TEACHING NOTE:** A Dev/Test account is omitted here as a conscious choice. In this project, synthetic data is treated as real PHI from day one — there is no "safe" environment where you can experiment without compliance controls. This is intentional: it forces the team to learn compliant workflows from the start rather than developing habits in a permissive environment that must later be unlearned. A real project with budget and timeline pressure might add a Dev/Test account for infrastructure experimentation (testing CDK stacks, trying new services) before deploying to Production. The tradeoff is complexity vs. safety margin.
+> [i] **TEACHING NOTE:** A Dev/Test account is omitted here as a conscious choice. In this project, synthetic data is treated as real PHI from day one — there is no "safe" environment where you can experiment without compliance controls. This is intentional: it forces the team to learn compliant workflows from the start rather than developing habits in a permissive environment that must later be unlearned. A real project with budget and timeline pressure might add a Dev/Test account for infrastructure experimentation (testing CDK stacks, trying new services) before deploying to Production. The tradeoff is complexity vs. safety margin.
 
 ### Management Account: Shared, Not Project-Owned
 
@@ -526,7 +526,7 @@ SCPs are guardrails applied by the Management account (UW IT) to all member acco
 
 **Expected SCPs for this project (to be confirmed with UW IT):**
 
-> 📋 **GENERIC:** The specific SCPs applied depend on UW IT's organizational policies. The following are representative guardrails typical for a HIPAA-aligned AWS Organization. The project team should request the actual SCP manifest from UW IT and document it here.
+> [i] **GENERIC:** The specific SCPs applied depend on UW IT's organizational policies. The following are representative guardrails typical for a HIPAA-aligned AWS Organization. The project team should request the actual SCP manifest from UW IT and document it here.
 
 | SCP | Purpose | Effect |
 |-----|---------|--------|
@@ -551,17 +551,17 @@ SCPs are guardrails applied by the Management account (UW IT) to all member acco
 
 **Primary region:** `us-west-2` (Oregon) — closest to UW, well-supported, all required services available, HIPAA-eligible.
 
-> 📋 **NOTE:** If a required service proves to be unavailable in us-west-2 (rare but possible for newer services), the project may need to enable a secondary region. This would require: SCP amendment from UW IT, cross-region encryption key replication, and documentation of why the additional region is necessary. Treat as an exception requiring PI approval.
+> [i] **NOTE:** If a required service proves to be unavailable in us-west-2 (rare but possible for newer services), the project may need to enable a secondary region. This would require: SCP amendment from UW IT, cross-region encryption key replication, and documentation of why the additional region is necessary. Treat as an exception requiring PI approval.
 
 ### Subnet Layout
 
 | Subnet Type | Used? | Contains | Internet Access |
 |-------------|-------|----------|-----------------|
-| **Private subnets** | ✅ Yes | All resources: EC2, RDS, EFS, Lambda, ECS, VPC Endpoints | Outbound via NAT Gateway (restricted to GitHub IPs and AWS service endpoints only) |
-| **Isolated subnets** | ❌ No | — | — |
-| **Public subnets** | ❌ No | — | — |
+| **Private subnets** | [x] Yes | All resources: EC2, RDS, EFS, Lambda, ECS, VPC Endpoints | Outbound via NAT Gateway (restricted to GitHub IPs and AWS service endpoints only) |
+| **Isolated subnets** | [ ] No | — | — |
+| **Public subnets** | [ ] No | — | — |
 
-> 📋 **TEACHING NOTE — Design choices:**
+> [i] **TEACHING NOTE — Design choices:**
 > - **No isolated subnets:** Isolated subnets (no NAT, no internet at all) would prevent resources from reaching *any* external endpoint, including AWS services without VPC Endpoints. Since we need connectivity to Bedrock, Comprehend Medical, GitHub, and other services, private subnets with controlled egress are sufficient. The VPC Endpoints provide private paths to AWS services; the NAT Gateway (with restrictive rules) handles GitHub. If a future requirement demands a resource with *zero* outbound connectivity, an isolated subnet can be added.
 > - **No public subnets:** No resource in this environment needs to be directly reachable from the internet. Researchers connect via AWS SSO + Session Manager (or a browser-based IDE), which does not require inbound internet access to the VPC. There are no load balancers, no public APIs, no bastion hosts. This eliminates an entire attack surface.
 > - **Potential issue:** If a service requires inbound internet connectivity in the future (e.g., a webhook receiver, a public-facing API for collaboration), a public subnet would need to be added. For now, there is no such requirement.
@@ -608,7 +608,7 @@ GitHub is the one external service that compute instances need to reach (for `gi
 
 This gives git operations a path out while blocking general internet browsing, external AI services, and arbitrary data exfiltration.
 
-> 📋 **ALTERNATIVE:** AWS CodeCommit (AWS-native git) could replace GitHub entirely, eliminating the need for any NAT Gateway. The tradeoff: CodeCommit has a smaller ecosystem and less collaboration tooling than GitHub. For a team already using GitHub, the NAT-with-restrictions approach is more practical.
+> [i] **ALTERNATIVE:** AWS CodeCommit (AWS-native git) could replace GitHub entirely, eliminating the need for any NAT Gateway. The tradeoff: CodeCommit has a smaller ecosystem and less collaboration tooling than GitHub. For a team already using GitHub, the NAT-with-restrictions approach is more practical.
 
 ### Researcher Access Path (Laptop → EC2)
 
@@ -683,7 +683,7 @@ All services (RDS, S3, Bedrock, EFS, etc.)
 | Bedrock | No access | IT does not do research |
 | CDK deployment | Full (CloudFormation create/update/delete) | IT deploys infrastructure |
 
-> 📋 **TEACHING NOTE — Separation of duties:** The `InfraAdmin` role is deliberately designed so that IT Staff can build and maintain the entire system without ever seeing patient data. This is enforced technically (IAM policies deny data-plane access) not just by policy. If IT Staff needs to troubleshoot a data issue, they escalate to the PI who can query the data. This separation means a compromised IT credential cannot exfiltrate PHI — it can only affect infrastructure.
+> [i] **TEACHING NOTE — Separation of duties:** The `InfraAdmin` role is deliberately designed so that IT Staff can build and maintain the entire system without ever seeing patient data. This is enforced technically (IAM policies deny data-plane access) not just by policy. If IT Staff needs to troubleshoot a data issue, they escalate to the PI who can query the data. This separation means a compromised IT credential cannot exfiltrate PHI — it can only affect infrastructure.
 
 #### `SeniorResearcher` (Postdoc + Co-PI)
 
@@ -708,7 +708,7 @@ All services (RDS, S3, Bedrock, EFS, etc.)
 | Same as `SeniorResearcher` | Same | Students see the same study cohort data |
 | Difference | None currently | All students have identical access to the full study cohort |
 
-> 📋 **NOTE:** `Researcher` and `SeniorResearcher` currently have identical data access. The distinction exists for: (a) future scoping if students are assigned to subsets, (b) governance clarity (the Postdoc can serve as deputy for operational decisions), and (c) audit trail differentiation (actions by students vs. senior researchers are distinguishable in logs).
+> [i] **NOTE:** `Researcher` and `SeniorResearcher` currently have identical data access. The distinction exists for: (a) future scoping if students are assigned to subsets, (b) governance clarity (the Postdoc can serve as deputy for operational decisions), and (c) audit trail differentiation (actions by students vs. senior researchers are distinguishable in logs).
 
 ### Federation and Authentication
 
@@ -858,7 +858,7 @@ During Phase 6 (Decommission), keys are scheduled for deletion:
 | **Secrets Manager** | `infra-key` | Secrets (database passwords, API keys) encrypted at rest |
 | **ECR** | `infra-key` | Container images encrypted in registry |
 
-> 📋 **TEACHING NOTE:** KMS encryption is largely transparent to researchers. They don't manually encrypt or decrypt — services handle it automatically based on key policies. A researcher querying RDS sees plaintext results because their IAM role + the key policy together authorize decryption. If their role were revoked, the same query would fail — not because the data disappeared, but because the key policy no longer grants them decrypt. This is why KMS is a *second layer* of access control beyond IAM.
+> [i] **TEACHING NOTE:** KMS encryption is largely transparent to researchers. They don't manually encrypt or decrypt — services handle it automatically based on key policies. A researcher querying RDS sees plaintext results because their IAM role + the key policy together authorize decryption. If their role were revoked, the same query would fail — not because the data disappeared, but because the key policy no longer grants them decrypt. This is why KMS is a *second layer* of access control beyond IAM.
 
 ---
 
@@ -871,7 +871,7 @@ During Phase 6 (Decommission), keys are scheduled for deletion:
 - **ECS/Fargate for batch processing** — ephemeral containers that scale to zero when idle. Cost-efficient for pipeline workloads.
 - **Start small, scale later** — initial sizing is modest (10K patients is not a large-data problem). The architecture accommodates growth (fMRI scans, larger cohorts, ML training) by resizing instances or adding capacity without redesigning the system.
 
-> 📋 **TEACHING NOTE:** The initial system will almost certainly require modification as the project evolves. Data volumes may grow (imaging data, longitudinal records), compute needs may increase (ML training, large-scale analysis), and new services may be needed. The architecture is designed to accommodate this: instances can be resized, new instances added, and services enabled without rebuilding the foundation. Plan for change; don't over-provision at the start.
+> [i] **TEACHING NOTE:** The initial system will almost certainly require modification as the project evolves. Data volumes may grow (imaging data, longitudinal records), compute needs may increase (ML training, large-scale analysis), and new services may be needed. The architecture is designed to accommodate this: instances can be resized, new instances added, and services enabled without rebuilding the foundation. Plan for change; don't over-provision at the start.
 
 ### IDE Instances (Per-Researcher EC2)
 
@@ -937,7 +937,7 @@ SageMaker provides several mechanisms for environment customization:
 | **Root volume** | Encrypted (KMS) |
 | **Idle timeout** | Auto-stop after 60 minutes of inactivity (cost management) |
 
-> 📋 **NOTE:** SageMaker is the starting point. If the team finds SageMaker's managed environment too restrictive (e.g., needs root access, custom kernels not supported, or specific GPU configurations), a self-managed JupyterHub on EC2 is the fallback. The architecture supports both — the VPC, IAM roles, and EFS mount work identically either way.
+> [i] **NOTE:** SageMaker is the starting point. If the team finds SageMaker's managed environment too restrictive (e.g., needs root access, custom kernels not supported, or specific GPU configurations), a self-managed JupyterHub on EC2 is the fallback. The architecture supports both — the VPC, IAM roles, and EFS mount work identically either way.
 
 ### Batch Processing (ECS/Fargate)
 
@@ -980,7 +980,7 @@ EC2 IDE instances and SageMaker notebooks are expensive when running idle. The f
 3. For start events: starts all instances; clears any `keep-alive` tags from previous night
 4. Logs all actions to CloudWatch
 
-> 📋 **TEACHING NOTE:** Cost management is not optional for NIH-funded cloud projects. AWS charges by the hour for running instances. A `m5.xlarge` running 24/7 costs ~$140/month; running only business hours (Mon–Fri 6AM–6PM) costs ~$50/month. For 6 IDE instances, that's $540/month saved. The override mechanism ensures cost management doesn't block research — a researcher running a long job simply tags their instance and it stays up.
+> [i] **TEACHING NOTE:** Cost management is not optional for NIH-funded cloud projects. AWS charges by the hour for running instances. A `m5.xlarge` running 24/7 costs ~$140/month; running only business hours (Mon–Fri 6AM–6PM) costs ~$50/month. For 6 IDE instances, that's $540/month saved. The override mechanism ensures cost management doesn't block research — a researcher running a long job simply tags their instance and it stays up.
 
 ---
 
@@ -1104,7 +1104,7 @@ SNS topic (project-security-alerts)
 | **MEDIUM** | Config drift (encryption disabled on new resource); Macie flags PHI in expected location; minor policy non-compliance | Within 1 week | Logged; reviewed in next scheduled weekly security review; remediated if needed; documented | IT Staff (remediate) at next review cycle |
 | **LOW** | Informational findings (Config rule passed; routine scan completed; expected access patterns) | Monthly review | No action unless pattern emerges over time; reviewed in monthly aggregate | PI (monthly review) |
 
-> 📋 **TEACHING NOTE — Why these timelines?** HIPAA does not specify exact response times for security incidents (the only hard deadline is 60 days for breach notification to HHS after *discovery*). These timelines are project-defined and reflect what a 7-person research team can realistically commit to. The PI and IT Staff are the responders — there is no 24/7 SOC. A larger organization with dedicated security operations would set tighter windows (15 minutes for CRITICAL, 1 hour for HIGH). What matters for compliance is: (a) you defined the timelines, (b) you documented them, (c) you can demonstrate you follow them (the Phase 4 incident response drill validates this), and (d) you review and adjust them based on experience. An auditor asks "what are your response times?" — you point here. They ask "do you follow them?" — you point to the incident log and drill reports.
+> [i] **TEACHING NOTE — Why these timelines?** HIPAA does not specify exact response times for security incidents (the only hard deadline is 60 days for breach notification to HHS after *discovery*). These timelines are project-defined and reflect what a 7-person research team can realistically commit to. The PI and IT Staff are the responders — there is no 24/7 SOC. A larger organization with dedicated security operations would set tighter windows (15 minutes for CRITICAL, 1 hour for HIGH). What matters for compliance is: (a) you defined the timelines, (b) you documented them, (c) you can demonstrate you follow them (the Phase 4 incident response drill validates this), and (d) you review and adjust them based on experience. An auditor asks "what are your response times?" — you point here. They ask "do you follow them?" — you point to the incident log and drill reports.
 
 ### Audit Account Log Architecture
 
@@ -1180,7 +1180,7 @@ Based on 10,000 patients, the architecture described in this document, and busin
 | **VPC Endpoints (×15)** | Interface endpoints | $0.01/hr each | 8,760 hrs | **$1,314** |
 | | | | **Estimated Total** | **~$6,500–7,500/year** |
 
-> 📋 **TEACHING NOTE:** The largest costs are EC2 (compute) and VPC Endpoints. VPC Endpoints are a fixed hourly cost whether or not anyone is using them — they can't be "stopped." This is the price of private networking without internet access. The alternative (NAT Gateway for everything) would be cheaper for endpoints but more expensive for data transfer and less secure. For a real project, evaluate whether all 15 endpoints are needed simultaneously or if some can be provisioned on-demand.
+> [i] **TEACHING NOTE:** The largest costs are EC2 (compute) and VPC Endpoints. VPC Endpoints are a fixed hourly cost whether or not anyone is using them — they can't be "stopped." This is the price of private networking without internet access. The alternative (NAT Gateway for everything) would be cheaper for endpoints but more expensive for data transfer and less secure. For a real project, evaluate whether all 15 endpoints are needed simultaneously or if some can be provisioned on-demand.
 
 ### What Drives Cost Down to $0.10/hr Range?
 
@@ -1264,7 +1264,7 @@ To wake up:
 7. Notify team: "Environment active"
 ```
 
-> 📋 **TEACHING NOTE:** The ability to hibernate is a major advantage of cloud over on-premises. A physical server in a data center costs the same whether anyone uses it or not. Cloud infrastructure can be scaled to zero during breaks, between grant periods, or when the project is in a documentation-only phase. Budget your NIH cloud costs based on *active months*, not 12 months × full rate. For a project active 9 months/year with 3 months hibernated: ~$5,500/year instead of $7,000 (saving ~$1,500 during the 3 hibernated months when only storage charges apply at ~$50/month).
+> [i] **TEACHING NOTE:** The ability to hibernate is a major advantage of cloud over on-premises. A physical server in a data center costs the same whether anyone uses it or not. Cloud infrastructure can be scaled to zero during breaks, between grant periods, or when the project is in a documentation-only phase. Budget your NIH cloud costs based on *active months*, not 12 months × full rate. For a project active 9 months/year with 3 months hibernated: ~$5,500/year instead of $7,000 (saving ~$1,500 during the 3 hibernated months when only storage charges apply at ~$50/month).
 
 ---
 
@@ -1427,7 +1427,7 @@ To enable DESTROY to work cleanly, the synthetic/development environment omits c
 | Audit log retention | 7 years (HIPAA requirement) | **Deleted with everything else** |
 | Final snapshots (RDS) | Retained | **Skipped** (`skip-final-snapshot` flag) |
 
-> 📋 **TEACHING NOTE:** A real production system handling actual PHI would use DECOMMISSION exclusively — you cannot DESTROY a system with real patient data without first satisfying retention obligations. DESTROY exists for the synthetic/learning context where there are no compliance retention requirements. The distinction is important: know which mode applies to your situation before executing. Accidentally running DESTROY on a production system with real PHI would be a compliance violation (destroying records before retention period expires) even though no data breach occurs.
+> [i] **TEACHING NOTE:** A real production system handling actual PHI would use DECOMMISSION exclusively — you cannot DESTROY a system with real patient data without first satisfying retention obligations. DESTROY exists for the synthetic/learning context where there are no compliance retention requirements. The distinction is important: know which mode applies to your situation before executing. Accidentally running DESTROY on a production system with real PHI would be a compliance violation (destroying records before retention period expires) even though no data breach occurs.
 
 ### Relationship to Hibernation
 
@@ -1436,7 +1436,7 @@ Hibernation (stopping services) is different from both DECOMMISSION and DESTROY:
 - **DECOMMISSION:** Controlled destruction with compliance obligations. Audit trail retained.
 - **DESTROY:** Total elimination. Nothing remains. Zero residual cost (after 7-day KMS wait).
 
-> 📋 **TEACHING NOTE:** The Blank Slate Rule also serves as a confidence test. If you can destroy and rebuild your entire environment from CDK code, you know your IaC is complete and correct. If `cdk destroy` followed by `cdk deploy` produces a working environment, your infrastructure is truly reproducible. This is worth testing periodically (in a Dev/Test account if you have one, or during a planned maintenance window).
+> [i] **TEACHING NOTE:** The Blank Slate Rule also serves as a confidence test. If you can destroy and rebuild your entire environment from CDK code, you know your IaC is complete and correct. If `cdk destroy` followed by `cdk deploy` produces a working environment, your infrastructure is truly reproducible. This is worth testing periodically (in a Dev/Test account if you have one, or during a planned maintenance window).
 
 ---
 
@@ -1541,7 +1541,7 @@ Security validation is not a one-time event. During operations:
 - Quarterly manual review repeats the IAM and access control tests
 - Any infrastructure change (CDK deployment) triggers re-validation of affected components
 
-> 📋 **TEACHING NOTE:** The validation checklist looks long, but most items are automatable. A validation script (Python + boto3) can enumerate resources, check encryption, verify security groups, and test access in minutes. The manual items (gatekeeper test, access control positive/negative tests) take perhaps an hour. The entire validation can be completed in a single day. The *first* time takes longer because you're also fixing what you find. Subsequent validations (after changes) are faster because the baseline is established.
+> [i] **TEACHING NOTE:** The validation checklist looks long, but most items are automatable. A validation script (Python + boto3) can enumerate resources, check encryption, verify security groups, and test access in minutes. The manual items (gatekeeper test, access control positive/negative tests) take perhaps an hour. The entire validation can be completed in a single day. The *first* time takes longer because you're also fixing what you find. Subsequent validations (after changes) are faster because the baseline is established.
 
 ---
 

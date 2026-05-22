@@ -4,7 +4,7 @@
 
 # Policy Suite: HIPAA Security Rule Compliance
 
-> ⚠️ **TEMPLATE:** These policy outlines are demonstrator templates. Each policy below provides structure, required sections, and example language. You are responsible for modifying every policy to be accurate to your program. Your actual versions must be considerably more detailed and specific, reviewed by legal counsel, and approved by your designated Privacy/Security Officer.
+> [!] **TEMPLATE:** These policy outlines are demonstrator templates. Each policy below provides structure, required sections, and example language. You are responsible for modifying every policy to be accurate to your program. Your actual versions must be considerably more detailed and specific, reviewed by legal counsel, and approved by your designated Privacy/Security Officer.
 
 > For a fully-realized example of what a complete policy looks like, see `POLICY_AI_ACCEPTABLE_USE.md` — that document demonstrates the level of specificity, detail, and operational guidance that each policy below should ultimately achieve.
 
@@ -59,7 +59,7 @@ Define who may access PHI, under what conditions, through what mechanisms, and h
    - Access attempts (successful and failed) logged via CloudTrail
    - Monthly review of access logs for anomalies
 
-> 📋 **GENERIC:** This outline must be populated with your specific role definitions, approval workflows, review schedules, and technical implementation details. Reference your IAM role mapping document and database view definitions.
+> [i] **GENERIC:** This outline must be populated with your specific role definitions, approval workflows, review schedules, and technical implementation details. Reference your IAM role mapping document and database view definitions.
 
 ---
 
@@ -101,7 +101,7 @@ Define how PHI is stored, transmitted, processed, and protected throughout its l
    - Database transaction logging
    - Backup verification procedures
 
-> 📋 **GENERIC:** Populate with your specific KMS key IDs, S3 bucket names, retention periods, and destruction certification templates.
+> [i] **GENERIC:** Populate with your specific KMS key IDs, S3 bucket names, retention periods, and destruction certification templates.
 
 ---
 
@@ -144,7 +144,7 @@ Define how security incidents are detected, reported, investigated, contained, a
    - Lessons learned documentation
    - Risk assessment update
 
-> 📋 **GENERIC:** This policy must include your specific escalation contacts, institutional reporting mechanisms, and legal counsel information. See External Questions in PROJECT_OVERVIEW.md for items requiring institutional input.
+> [i] **GENERIC:** This policy must include your specific escalation contacts, institutional reporting mechanisms, and legal counsel information. See External Questions in PROJECT_OVERVIEW.md for items requiring institutional input.
 
 ---
 
@@ -187,7 +187,7 @@ Define consequences for violations of HIPAA policies and project security requir
    - Good-faith reporting protected
    - Retaliation for reporting is itself a sanctionable offense
 
-> 📋 **GENERIC:** Replace with your institution's specific disciplinary procedures. Reference student conduct codes, employment policies, and any collective bargaining agreements that may apply. Consult HR and legal counsel.
+> [i] **GENERIC:** Replace with your institution's specific disciplinary procedures. Reference student conduct codes, employment policies, and any collective bargaining agreements that may apply. Consult HR and legal counsel.
 
 ---
 
@@ -226,7 +226,7 @@ Ensure that all personnel with access to PHI are appropriate, trained, supervise
    - Time-limited access with explicit expiration
    - Sponsor (PI) responsible for oversight
 
-> 📋 **GENERIC:** Populate with your specific onboarding checklist, training requirements, background check policies, and offboarding procedures. Reference your institution's HR policies.
+> [i] **GENERIC:** Populate with your specific onboarding checklist, training requirements, background check policies, and offboarding procedures. Reference your institution's HR policies.
 
 ---
 
@@ -265,7 +265,7 @@ Define how storage media and data are securely disposed of when no longer needed
    - NIST SP 800-88 (Guidelines for Media Sanitization)
    - AWS-specific guidance for cloud resource deletion
 
-> 📋 **GENERIC:** Populate with your specific retention periods, destruction certification templates, and any institutional records management requirements. Coordinate with your institution's records office and legal counsel.
+> [i] **GENERIC:** Populate with your specific retention periods, destruction certification templates, and any institutional records management requirements. Coordinate with your institution's records office and legal counsel.
 
 ---
 

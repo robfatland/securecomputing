@@ -112,8 +112,8 @@ All AI prompts originating from the research environment pass through the gateke
 | Detection | Action | User Experience |
 |-----------|--------|-----------------|
 | No PHI detected | Prompt forwarded to Bedrock; response returned normally | Transparent — user sees no delay beyond normal latency |
-| PHI detected (high confidence ≥0.9) | Prompt **blocked**; user notified with explanation | User sees: "⚠️ PHI detected in prompt: [entity type] found. Prompt not sent. Please remove PHI and retry." |
-| PHI detected (medium confidence 0.7–0.9) | Prompt **held**; user warned; may override with acknowledgment | User sees: "⚠️ Possible PHI detected: [entity type]. Send anyway? (Your override will be logged.)" |
+| PHI detected (high confidence ≥0.9) | Prompt **blocked**; user notified with explanation | User sees: "[!] PHI detected in prompt: [entity type] found. Prompt not sent. Please remove PHI and retry." |
+| PHI detected (medium confidence 0.7–0.9) | Prompt **held**; user warned; may override with acknowledgment | User sees: "[!] Possible PHI detected: [entity type]. Send anyway? (Your override will be logged.)" |
 | PHI detected (low confidence <0.7) | Prompt forwarded with flag | Transparent; logged for periodic review |
 
 **Entity types detected:**
@@ -290,7 +290,7 @@ Good-faith reporting of potential violations — including self-reporting — wi
 
 ## 10. Sanctions
 
-> 📋 **GENERIC:** The following sanctions framework uses generic language appropriate for a template. Your version must reference your institution's specific disciplinary procedures, student conduct codes, and employment policies.
+> [i] **GENERIC:** The following sanctions framework uses generic language appropriate for a template. Your version must reference your institution's specific disciplinary procedures, student conduct codes, and employment policies.
 
 Violations of this policy are subject to progressive sanctions:
 
@@ -354,7 +354,7 @@ When internal AI (Bedrock) processes prompts that contain or reference PHI, the 
 - Be subject to the same retention and disposition policies
 - Be included in the data inventory for decommission purposes
 
-> 🔄 **REVISIT:** As AI capabilities evolve and researchers develop more sophisticated AI-on-PHI workflows (e.g., "summarize all records for patients with condition X"), this section may need expansion to address: output classification criteria, de-identification of AI outputs, and whether AI-generated summaries can be treated as a Limited Data Set.
+> [~] **REVISIT:** As AI capabilities evolve and researchers develop more sophisticated AI-on-PHI workflows (e.g., "summarize all records for patients with condition X"), this section may need expansion to address: output classification criteria, de-identification of AI outputs, and whether AI-generated summaries can be treated as a Limited Data Set.
 
 ---
 
@@ -415,7 +415,7 @@ The minimum-necessary principle applies to agent actions:
 
 **Technical enforcement:** The agent operates under the same IAM role and database views as the researcher. It *cannot* access data the researcher cannot access. But it *can* access more data than a specific request requires — this is a minimum-necessary concern, not an access-control concern.
 
-> 🔄 **REVISIT:** As agentic AI matures, consider whether agents should have their own IAM roles (more restrictive than the researcher's) or whether per-request scoping is feasible. Also consider whether agent "reasoning traces" should be retained as compliance evidence.
+> [~] **REVISIT:** As agentic AI matures, consider whether agents should have their own IAM roles (more restrictive than the researcher's) or whether per-request scoping is feasible. Also consider whether agent "reasoning traces" should be retained as compliance evidence.
 
 ---
 

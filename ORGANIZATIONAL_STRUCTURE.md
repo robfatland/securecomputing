@@ -4,7 +4,7 @@
 
 # Organizational Structure: Large R1 University Medical Research Environment
 
-> ⚠️ **NOTE:** This document describes a *generic* organizational model for a large R1 university. The project-specific team composition, role assignments, and access levels are defined in `PHASE0_CHARTER.md` and `PROJECT_OVERVIEW.md` (Project Scenario Summary). Key differences from this generic model: (1) the Co-PI at FH has full PHI access within the UW environment (not de-identified only), (2) the 7-person team maps to a subset of the roles described here, (3) there is no Department Chair or Compliance Officer in the project team — the PI fills the Privacy Officer role. Use this document for understanding the broader institutional context; use the charter for project-specific role definitions.
+> [!] **NOTE:** This document describes a *generic* organizational model for a large R1 university. The project-specific team composition, role assignments, and access levels are defined in `PHASE0_CHARTER.md` and `PROJECT_OVERVIEW.md` (Project Scenario Summary). Key differences from this generic model: (1) the Co-PI at FH has full PHI access within the UW environment (not de-identified only), (2) the 7-person team maps to a subset of the roles described here, (3) there is no Department Chair or Compliance Officer in the project team — the PI fills the Privacy Officer role. Use this document for understanding the broader institutional context; use the charter for project-specific role definitions.
 
 ## Context
 

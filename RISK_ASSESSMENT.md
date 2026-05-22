@@ -4,7 +4,7 @@
 
 # Risk Assessment
 
-> ⚠️ **TEMPLATE:** This risk assessment is a demonstrator example. You are responsible for modifying this to be accurate to your program. Threat scenarios, likelihood scores, and mitigations must be reviewed against your actual institutional context, threat landscape, and risk tolerance.
+> [!] **TEMPLATE:** This risk assessment is a demonstrator example. You are responsible for modifying this to be accurate to your program. Threat scenarios, likelihood scores, and mitigations must be reviewed against your actual institutional context, threat landscape, and risk tolerance.
 
 ## Document Status
 
@@ -201,7 +201,7 @@ UW Clinical DB → (TLS) → S3 Landing Zone → Validation → S3 Validated
 
 ## 6. Risk Acceptance
 
-> 📋 **GENERIC:** The following acceptance statement is template language. Your version must be signed by the actual sponsor with specific reference to the residual risks they are accepting.
+> [i] **GENERIC:** The following acceptance statement is template language. Your version must be signed by the actual sponsor with specific reference to the residual risks they are accepting.
 
 I, Dr. D.R. Smith, as project sponsor and designated Security Officer, have reviewed this risk assessment. I accept the residual risks documented above, acknowledging that:
 

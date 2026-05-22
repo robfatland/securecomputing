@@ -69,20 +69,20 @@ Each Interface Endpoint costs $0.01/hr = $7.30/month. We minimize by deploying o
 
 | Endpoint | Needed? | Justification |
 |----------|---------|---------------|
-| S3 (Gateway) | ✅ Yes | Free (Gateway type) — always include |
-| SSM | ✅ Yes | Researcher access to EC2 (no SSH alternative) |
-| KMS | ✅ Yes | All encryption/decryption operations |
-| CloudWatch Logs | ✅ Yes | Log shipping from all compute |
-| ECR (api + dkr) | ✅ Yes (2 endpoints) | Container image pulls |
-| STS | ✅ Yes | IAM role assumption |
-| Bedrock | ✅ Yes | AI inference |
-| Comprehend Medical | ✅ Yes | Gatekeeper PHI detection |
+| S3 (Gateway) | [x] Yes | Free (Gateway type) — always include |
+| SSM | [x] Yes | Researcher access to EC2 (no SSH alternative) |
+| KMS | [x] Yes | All encryption/decryption operations |
+| CloudWatch Logs | [x] Yes | Log shipping from all compute |
+| ECR (api + dkr) | [x] Yes (2 endpoints) | Container image pulls |
+| STS | [x] Yes | IAM role assumption |
+| Bedrock | [x] Yes | AI inference |
+| Comprehend Medical | [x] Yes | Gatekeeper PHI detection |
 | **Subtotal (8 Interface)** | | **$58/month** |
-| SageMaker (api + runtime) | ⚠️ Defer | Add when SageMaker is actively used |
-| SNS | ⚠️ Defer | Alerts can route via CloudWatch → Lambda → NAT |
-| Secrets Manager | ⚠️ Defer | Low-frequency access; can use NAT |
-| ECS | ⚠️ Defer | Add when container pipelines are running |
-| Lambda | ⚠️ Defer | Lambda in VPC can use NAT for invocations |
+| SageMaker (api + runtime) | [!] Defer | Add when SageMaker is actively used |
+| SNS | [!] Defer | Alerts can route via CloudWatch → Lambda → NAT |
+| Secrets Manager | [!] Defer | Low-frequency access; can use NAT |
+| ECS | [!] Defer | Add when container pipelines are running |
+| Lambda | [!] Defer | Lambda in VPC can use NAT for invocations |
 
 **Strategy:** Start with 8 essential endpoints. Add others as needed. Each addition is $7.30/month.
 
@@ -118,14 +118,14 @@ Each Interface Endpoint costs $0.01/hr = $7.30/month. We minimize by deploying o
 
 | Tactic | Savings | Implemented |
 |--------|---------|-------------|
-| Auto-stop EC2 (6PM daily) | ~60% of compute cost | ✅ In design |
-| SageMaker idle-stop (60 min) | ~50% of SageMaker cost | ✅ In design |
+| Auto-stop EC2 (6PM daily) | ~60% of compute cost | [x] In design |
+| SageMaker idle-stop (60 min) | ~50% of SageMaker cost | [x] In design |
 | Stop RDS/DocumentDB when not in use | ~60% of database cost | Manual (hibernate procedure) |
 | Delete VPC Endpoints during hibernation | $58/month | Manual (recreate via CDK on wake) |
-| Use t3.medium instead of m5.xlarge | $110/mo per instance saved | ✅ In design |
-| Skip Macie initially | $50–100/month | ✅ In design |
-| Skip DocumentDB entirely (use PostgreSQL JSONB) | $55/month | ⚠️ Consider if budget tight |
-| One-Zone EFS | ~47% of EFS cost | ✅ In design |
+| Use t3.medium instead of m5.xlarge | $110/mo per instance saved | [x] In design |
+| Skip Macie initially | $50–100/month | [x] In design |
+| Skip DocumentDB entirely (use PostgreSQL JSONB) | $55/month | [!] Consider if budget tight |
+| One-Zone EFS | ~47% of EFS cost | [x] In design |
 
 ---
 

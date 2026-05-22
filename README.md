@@ -55,7 +55,7 @@ sudo apt install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
 
 **5. Lua filter for emoji**
 
-The file `strip-emoji.lua` (in this repo) replaces emoji characters (📋, ✅, ❌, 🔄, ⚠️)
+The file `strip-emoji.lua` (in this repo) replaces emoji characters ([i], [x], [ ], [~], [!])
 with text equivalents before XeLaTeX processes them. No emoji font installation is needed.
 The source markdown is unchanged — emoji still render on GitHub.
 

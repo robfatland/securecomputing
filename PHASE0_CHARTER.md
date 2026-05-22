@@ -4,7 +4,7 @@
 
 # Phase 0 Deliverable: Project Charter
 
-> ⚠️ **TEMPLATE:** This charter is a demonstrator example built for a synthetic PHI project. You are responsible for modifying this to be accurate to your program. Replace all bracketed placeholders with institution-specific details. Sections marked with 📋 use generic language that must be replaced with verified, institution-specific content.
+> [!] **TEMPLATE:** This charter is a demonstrator example built for a synthetic PHI project. You are responsible for modifying this to be accurate to your program. Replace all bracketed placeholders with institution-specific details. Sections marked with [i] use generic language that must be replaced with verified, institution-specific content.
 
 ## Document Status
 
@@ -141,7 +141,7 @@ The PI holds multiple roles (sponsor, Privacy Officer, Security Officer). This i
 | Budget/procurement | PI | PI decides within NIH award scope |
 | Escalation | UW CISO | PI escalates institutional-level security issues to CISO |
 
-> 📋 **GENERIC:** The incident response and escalation rows above use simplified language. Your version must specify: institutional SOC contact information, severity classification thresholds, CISO engagement criteria, and the legal/compliance office responsible for HHS breach notification. See External Questions in PROJECT_OVERVIEW.md.
+> [i] **GENERIC:** The incident response and escalation rows above use simplified language. Your version must specify: institutional SOC contact information, severity classification thresholds, CISO engagement criteria, and the legal/compliance office responsible for HHS breach notification. See External Questions in PROJECT_OVERVIEW.md.
 
 ### Approval Chain for PHI Access
 
@@ -204,7 +204,7 @@ This project treats AI as an essential research tool subject to full HIPAA gover
 | HIPAA training procurement | Blocks Gate G3 | Identify vendor (CITI) early; confirm UW subscription or budget |
 | UW–FH sub-award data access terms | Blocks Co-PI access | Confirm sub-award language covers PHI access in UW environment |
 
-> ⚠️ **TEMPLATE:** The PI is responsible for spelling out the Co-Investigator relationship and establishing the PHI access agreement. This involves confirming that the sub-award (or a separate DUA/amendment) explicitly authorizes the Co-PI to access raw PHI within the UW AWS environment, and that FH's institutional obligations are documented. Contact your Office of Sponsored Programs or institutional legal counsel.
+> [!] **TEMPLATE:** The PI is responsible for spelling out the Co-Investigator relationship and establishing the PHI access agreement. This involves confirming that the sub-award (or a separate DUA/amendment) explicitly authorizes the Co-PI to access raw PHI within the UW AWS environment, and that FH's institutional obligations are documented. Contact your Office of Sponsored Programs or institutional legal counsel.
 | Team changes during PoP | Onboarding/offboarding overhead | Documented procedures; training prerequisite enforced |
 | AI service availability/changes | Gatekeeper design may need updates | Design for modularity; abstract AI backend |
 | Comprehend Medical detection limits | May miss non-standard PHI patterns | Supplement with regex patterns for known formats (MRN patterns, etc.) |
