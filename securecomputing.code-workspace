@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../securecomputing-datagen"
+		},
+		{
+			"path": "../securecomputing-data"
+		},
+		{
+			"path": "../synthea"
+		}
+	],
+	"settings": {}
+}
