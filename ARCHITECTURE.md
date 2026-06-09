@@ -48,6 +48,7 @@ All AWS services used in this project must be HIPAA-eligible (listed on the [AWS
 | **AWS Glue** | ETL pipelines for data transformation | Phase 3 — depends on processing complexity |
 | **Amazon QuickSight** | Visualization/dashboards for research results | Phase 5 — depends on reporting needs |
 | **EKS (Kubernetes)** | Container orchestration (if ECS is insufficient) | Phase 2 — depends on workload complexity |
+| **AWS Security Agent** | AI-driven automated penetration testing; validates vulnerabilities through actual exploitation and provides reproducible exploit paths with remediation guidance | Phase 4 (Gate G6) — could satisfy the pen test requirement for system authorization. Currently in preview (2025). Revisit at G6. |
 
 ### External Services (outside AWS, outside compliance boundary)
 
@@ -1714,3 +1715,7 @@ app.synth()
 **To tear down:** `cdk destroy --all` reverses the process — CloudFormation deletes all resources in reverse dependency order.
 
 **The `destroy_mode` flag:** When `True` (development default), stacks omit Object Lock, MFA Delete, and use 7-day KMS deletion. When `False` (production), stacks apply full HIPAA retention controls. This single flag is the switch between DESTROY-compatible and DECOMMISSION-compatible configurations.
+
+---
+
+*End of ARCHITECTURE.md — Next: GATES.md*

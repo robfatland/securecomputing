@@ -236,3 +236,7 @@ By signing below, the sponsor authorizes the project to proceed through the Day 
 | **IT Staff** | [IT Staff Name] | _________________ | ________ |
 
 **Upon signature, Gate G1 is satisfied and Phase 1 may begin.**
+
+---
+
+*End of PHASE0_CHARTER.md — Next: RISK_ASSESSMENT.md*

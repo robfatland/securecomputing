@@ -153,3 +153,7 @@ When transitioning from synthetic to real PHI, upgrade these:
 | MFA Delete | Disabled | Enabled on audit bucket | $0 |
 | KMS deletion | 7-day wait | 30-day wait | $0 |
 | **Total upgrade** | | | **+$165–215/month** |
+
+---
+
+*End of COST.md — Next: COMPLETION.md*

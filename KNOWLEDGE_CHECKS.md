@@ -510,3 +510,7 @@ The alternative (fail-open: bypass the gatekeeper when it's down) would mean tha
 11. **If it involves AI processing** — Run through the AI service approval process (POLICY_AI_ACCEPTABLE_USE.md Section 8).
 
 **Note:** This does NOT require re-walking Gates G1–G4. Those are already satisfied. It triggers a *partial G5 re-validation* for the new component only. The system is already authorized (G6); adding a service is a change-management event during Phase 5 operations.
+
+---
+
+*End of KNOWLEDGE_CHECKS.md — Next: APPENDICES.md*

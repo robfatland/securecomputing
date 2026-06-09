@@ -150,6 +150,7 @@ Each gate is expressed in terms of **what its completion enables** — the work 
 - End-to-end workflow test results (researcher scenarios executed successfully)
 - Vulnerability scan report (no critical/high findings unresolved)
 - Penetration test report (no exploitable vulnerabilities)
+  - *Note: AWS Security Agent (preview 2025) may satisfy this requirement via automated, AI-driven pen testing with verified exploit paths. Evaluate availability and maturity when G6 is approached.*
 - Black Hat Test results (breach detection demonstrated for both scenarios)
 - Audit simulation findings (gaps identified and remediated)
 - Incident response drill after-action report
@@ -201,3 +202,7 @@ Gates are enforced through:
 4. **Audit trail:** Gate passage is logged: date satisfied, evidence location, who verified.
 
 In practice for a small research team, gate enforcement is primarily documentation-based. The PI (wearing the compliance officer hat) verifies that evidence exists and records the gate passage date. For a larger organization, gates might be enforced by workflow systems or separate compliance staff.
+
+---
+
+*End of GATES.md — Next: PHASE0_CHARTER.md*

@@ -65,3 +65,7 @@ SP 800-53 (master catalog, ~1000 controls)
 | Assessment | Self-assessment common; OCR audits rare | Formal assessment required; CMMC involves third-party auditors |
 | Incident reporting | 60 days | 72 hours |
 | Certification | None required (compliance is self-attested) | CMMC certification (third-party verified) |
+
+---
+
+*End of NISTDocs.md — Next: ORGANIZATIONAL_STRUCTURE.md*

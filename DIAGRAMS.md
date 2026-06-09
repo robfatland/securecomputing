@@ -208,3 +208,7 @@ stateDiagram-v2
 **DESTROY** (this demonstrator): Everything deleted. Nothing remains. For synthetic/development systems with no retention obligations.
 
 **DECOMMISSION** (production): PHI destroyed, infrastructure torn down, but audit logs retained for 6–7 years per HIPAA. See `COMPLETION.md` for what must be built to enable this mode.
+
+---
+
+*End of DIAGRAMS.md — Next: COST.md*

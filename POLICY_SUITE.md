@@ -293,3 +293,7 @@ Each policy should trace to risk assessment findings:
 Each policy should reference the technical controls that enforce it:
 - "This policy is enforced by IAM role [X], database view [Y], and monitored by CloudWatch alarm [Z]"
 - Policies without technical enforcement rely solely on human compliance — identify these as higher risk
+
+---
+
+*End of POLICY_SUITE.md — Next: SYNTHETIC_DATA.md*

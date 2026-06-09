@@ -240,3 +240,7 @@ Analysis / Publication
 ---
 
 *For the project-specific implementation of these roles, see `PHASE0_CHARTER.md` Section 4 and `ARCHITECTURE.md` → IAM Architecture.*
+
+---
+
+*End of ORGANIZATIONAL_STRUCTURE.md — Next: KNOWLEDGE_CHECKS.md*

@@ -336,7 +336,23 @@ exit
 
 ### 6. Upload synthetic data
 
-Requires data to have been generated first (see `securecomputing-datagen/BUILD.md`).
+Requires data in `~/securecomputing-data/`. If this machine doesn't have it yet, sync from the persistent S3 copy:
+
+```bash
+# Download synthetic data from persistent storage (uses securecomputing profile)
+aws s3 sync s3://securecomputing-persistent-data/ ~/securecomputing-data/ --profile securecomputing
+
+# Verify: should show ~25,900 files, ~896 MB
+find ~/securecomputing-data -type f | wc -l
+du -sh ~/securecomputing-data/
+```
+
+> **Note on AWS profiles:** If you work with multiple AWS accounts, configure a named profile
+> for this project (`aws configure --profile securecomputing`). The persistent data bucket
+> may reside in a different account than the CDK deployment target. See `~/.aws/credentials`
+> for profile setup.
+
+Then upload to the CDK-managed landing zone (infrastructure must be deployed first):
 
 ```bash
 # Set bucket name (from step 4)

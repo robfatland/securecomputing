@@ -470,3 +470,7 @@ Amazon Comprehend Medical detects the following entity categories:
 - SSN format: `\d{3}-\d{2}-\d{4}`
 - Phone format: `\d{3}[-.]?\d{3}[-.]?\d{4}`
 - Date formats: `\d{4}-\d{2}-\d{2}`, `\d{2}/\d{2}/\d{4}`
+
+---
+
+*End of POLICY_AI_ACCEPTABLE_USE.md — Next: POLICY_SUITE.md*

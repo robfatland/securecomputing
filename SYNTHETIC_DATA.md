@@ -149,3 +149,7 @@ securecomputing CI (analysis environment)
 ---
 
 *All data in this project is synthetic. It is designed to resemble real clinical data in structure and complexity without representing any actual patients.*
+
+---
+
+*End of SYNTHETIC_DATA.md — Next: ANALYSIS.md*

@@ -1,11 +1,106 @@
 # Synthetic PHI Environment on AWS for Clinical Research (SPEACR)
 
+
 > **PDF generation:** See `APPENDICES.md` for print instructions.
+
+
+## Project Overview
+
+
+The purpose of this project is to document a functional synthetic research computing environment on the AWS cloud as a learning instance of PHI handling under NIST guidelines for HIPAA compliance.
+
+
+## Narrative
+
+
+11,272 Washington state residents were selected for a study of kidney stone
+(nephrolithiasis) occurrence in relation to diagnostic labs and genetic
+sequencing results. Stone mineral composition was characterized via powder
+X-ray diffraction and infrared spectroscopy. Four types of data were collected:
+electronic health records (EHR), crystallography, genomics, and lab tests.
+
+
+Choosing at random patient 3792 we find this is Brian Bayer, age 17, Wenatchee, WA, 
+Medical Record Number B22767616. This patient has had two kidney stone episodes 
+— one calcium oxalate, one uric acid — consistent with lab results showing elevated 
+urine calcium, hyperuricemia, low urine pH, and from genetic screening pathogenic 
+variants in the CASR and VDR genes.
+
+
+If Brian Bayer were a real person, the preceding paragraph would constitute a
+breach of HIPAA rules. Everything about this patient — including his name,
+address, medical record number, and clinical history — is entirely fabricated.
+
+
+Generating four interrelated synthetic datasets and analyzing them simulates a
+clinical research project in useful detail. This simulation becomes the basis
+for building and operating a secure computing environment on the Amazon cloud: 
+A working model for actual studies using real Protected Health Information (PHI).
+
+
+In what follows it is helpful to bear in mind that HIPAA regulations define 
+**what** HIPAA should accomplish. A series of documents produced by
+the National Institute for Standards and Technology (NIST) and referenced
+extensively herein describe **how** this is to be done.
+
+
+The project infrastructure is implemented on the Amazon Web Services (AWS) cloud 
+for a number of reasons. 
+
+
+- no need to purchase, maintain and operate dedicated hardware (servers, network and routing equipment, etcetera)
+- access to over 20 HIPAA-aligned services that do not need to be
+'reinvented' in an on-premise context. 
+    - Example: AWS *Comprehend Medical* service is a natural language processing tool used to prevent accidentally sending PHI to a LLM 
+- infrastructure can be built from code
+    - reproducible, testable, logical refinement process
+    - programmatic infrastructure can be cleanly *deleted*
+        - no residual 'forgotten' artifacts and services
+
+
+Much of HIPAA compliance involves cooperative action on the part of participating
+researchers working with governance and oversight entities at participating 
+institutions. To the degree possible this project models or incorporates these actions
+by description and by (synthetic) attestation.
+
+
+To achieve the project objectives (described below) this document proceeds as a sequence of chapters:
+
+
+1. Define project objectives and terminology
+2. By means of a Question/Answer process: Design and build a secure computing environment
+3. Generate and import synthetic patient data
+4. Discuss the operation of the secure computing environment
+5. Present analysis results in the context of secure operations
+6. Present an audit narrative
+7. Enumerate the gaps between this synthetic project and a real implementation
+8. Close with knowledge check questions, concluding remarks and references
+
+
+## Chapter 1. Objectives and terminology
+
+
+### Project objectives
+
+- **Establish a baseline understanding** of working with PHI data (clinical data, EHR systems, etc.)
+- **Design and implement HIPAA-compliant** cloud infrastructure following NIST guidelines
+- **Frame and elaborate commensurate practices* per NIST guidelines
+- **Create a synthetic PHI environment** with realistic but entirely fabricated data
+- **Enable safe exploration** of PHI handling, storage, transmission, and processing patterns
+- **Understand HIPAA compliance** as a holistic framework combining organizational and technical controls
+- **Synthetic Data**: All content is made-up to resemble real PHI without using actual patient information
+- **AWS-Native**: Computing infrastructure is deployed on the AWS cloud platform
+- **NIST/HIPAA-Aligned**: Design and implementation follows NIST guidance for HIPAA compliance
+- **Learning Resource**: The environment serves as a hands-on learning tool for the PI and team — building compliance understanding through the process of constructing the system, not just reading about it
+- **Question-based build narrative**: Steps through the phases of building a HIPAA-compliant system through a series of questions posed to a Principal Investigator
+- **Demonstration System**: The completed environment serves as a template for real PHI research projects, built to the high compliance standards
+- **Blank Slate Rule**: Computing infrastructure is defined and built from code; and can be cleanly destroyed and verified as empty. The result is no 'zombie' services, no orphaned spend. For more see `ARCHITECTURE.md`.
 
 ## Project Documents
 
 | Document | Summary |
 |----------|---------|
+| `TITLE.md` | Cover page: title, author, preparation date |
 | `PROJECT_OVERVIEW.md` | Master document: objectives, glossary, HIPAA/NIST framework, project scenario, Day Framework phases, pre-existing conditions, and to-do list |
 | `ARCHITECTURE.md` | Technical architecture: AWS services registry, researcher environment model, network design, upload path security, AI gatekeeper design |
 | `GATES.md` | Gate registry: definitions, evidence requirements, sequencing, and enforcement for all six project gates |
@@ -15,6 +110,7 @@
 | `POLICY_SUITE.md` | Phase 1 deliverable: template outlines for access control, data handling, incident response, sanctions, workforce security, media disposal policies |
 | `NISTDocs.md` | Reference guide: NIST publications relevant to HIPAA and CUI compliance with canonical URLs |
 | `SYNTHETIC_DATA.md` | Synthetic data overview: dataset descriptions (PD0–PD3), formats, examples, and visualizations |
+| `ANALYSIS.md` | Multi-modal analysis: cohort summary, stone profiling, genomic correlation, lab trajectories, predictive model |
 | `DIAGRAMS.md` | System architecture diagrams (Mermaid): network, data flow, IAM, lifecycle |
 | `COST.md` | AWS service cost estimates, spend tactics, hibernation/destroy cost comparison |
 | `COMPLETION.md` | Demonstrator vs. production: what's built, what's missing, and what a real project must add |
@@ -28,32 +124,13 @@
 | `securecomputing` (this repo) | System documentation, IaC, policies, analysis code | The research environment itself |
 | `securecomputing-datagen` | Synthetic PHI generation tooling (Synthea config, custom generators, schema definitions) | Data factory — produces synthetic patient data loaded into the analysis environment via the standard upload path. Isolated from the analysis system by design: datagen has no access to the analysis environment and vice versa. |
 
----
 
-## Project Overview
-
-The purpose of this project is to document a functional synthetic research computing environment on the AWS cloud as a learning instance of PHI handling under NIST guidelines for HIPAA compliance.
+## Disclaimer
 
 
-*Disclaimer: This project presents a hypothetical scenario and computing system including learning materials. It is under development as of June 2026 and has not yet been officially reviewed or sanctioned by UW or UW Medicine information security offices.*
+This project presents a hypothetical scenario and computing system including learning materials. It is under development as of July 2026 and has not yet been officially reviewed or sanctioned by UW or UW Medicine information security offices.
 
-## Objectives
 
-- **Establish a baseline understanding** of working with PHI data (clinical data, EHR systems, etc.)
-- **Implement HIPAA-compliant** infrastructure and practices following NIST guidelines
-- **Create a synthetic PHI environment** with realistic but entirely fabricated data
-- **Enable safe exploration** of PHI handling, storage, transmission, and processing patterns
-- **Understand HIPAA compliance** as a holistic framework combining organizational and technical controls
-
-## Key Characteristics
-
-- **Synthetic Data**: All content is made-up to resemble real PHI without using actual patient information
-- **AWS-Native**: Computing infrastructure is deployed on the AWS cloud platform
-- **NIST/HIPAA-Aligned**: Design and implementation follows NIST guidance for HIPAA compliance
-- **Learning Resource**: The environment serves as a hands-on learning tool for the PI and team — building compliance understanding through the process of constructing the system, not just reading about it
-- **Demonstration System**: The completed environment serves as a reusable template for real PHI research projects, built to the highest compliance standard so subsequent projects can inherit the framework
-- **Question-based build narrative**: Steps through the phases of building a HIPAA-compliant system through a series of questions posed to a Principal Investigator
-- **Blank Slate Rule**: All infrastructure is defined in CDK code and can be cleanly destroyed and verified empty — no zombie services, no orphaned spend. The same code that builds the system tears it down. See `ARCHITECTURE.md` for implementation details.
 
 ---
 
@@ -88,10 +165,8 @@ The purpose of this project is to document a functional synthetic research compu
 | **UW** | A nominal designator for the PI's university institution — data source, primary research site, holder of the AWS BAA. |
 | **FH** | A nominal designator for a hypothetical collaborator's healthcare facility; a Co-PI institution. |
 | **PI** | Principal Investigator — the lead researcher on the project; holds the NIH award; serves as project sponsor, Privacy Officer, and risk acceptor. |
-| **SCP** | Service Control Policy — an AWS Organizations policy that sets permission guardrails on member accounts. SCPs define the *maximum* permissions available in an account; they cannot grant permissions, only restrict them. Applied by the Management account and inherited by all member accounts in the Organization. |
-| **Key Policy** | A resource-based policy attached to a KMS encryption key that defines who can use the key for encryption, decryption, and administration. Key policies are *independent of* IAM policies — both must allow an action for it to succeed. This is how the project enforces separation of duties: even if an IAM policy grants broad S3 access, the key policy can deny decrypt permission, making the data unreadable. Key policies are the mechanism that prevents IT Staff from reading PHI despite having infrastructure admin access. |
 
-### Technical Terms
+### AWS and Related Technical Terms
 
 | Term | Definition |
 |------|------------|
@@ -102,6 +177,8 @@ The purpose of this project is to document a functional synthetic research compu
 | **MFA** | Multi-Factor Authentication — requiring two or more verification factors (something you know + something you have) to authenticate. Required for all access to the research environment. Mitigates credential theft. |
 | **TLS** | Transport Layer Security — cryptographic protocol that provides encryption in transit. All data moving between systems (upload to S3, database connections, API calls) uses TLS 1.2 or higher. |
 | **KMS** | Key Management Service — AWS service for creating and managing encryption keys. All PHI at rest is encrypted with KMS-managed keys. Key policies restrict which roles can encrypt/decrypt. |
+| **Key Policy** | A resource-based policy attached to a KMS encryption key that defines who can use the key for encryption, decryption, and administration. Key policies are *independent of* IAM policies — both must allow an action for it to succeed. This is how the project enforces separation of duties: even if an IAM policy grants broad S3 access, the key policy can deny decrypt permission, making the data unreadable. Key policies are the mechanism that prevents IT Staff from reading PHI despite having infrastructure admin access. |
+| **SCP** | Service Control Policy — an AWS Organizations policy that sets permission guardrails on member accounts. SCPs define the *maximum* permissions available in an account; they cannot grant permissions, only restrict them. Applied by the Management account and inherited by all member accounts in the Organization. |
 | **S3** | Simple Storage Service — AWS object storage. Used for PHI landing zone, validated data, derived data, and audit logs. Encrypted, versioned, access-logged. |
 | **RDS** | Relational Database Service — AWS managed database. Stores structured PHI (patient records). Encrypted at rest and in transit. |
 | **EC2** | Elastic Compute Cloud — AWS virtual machines. Hosts the IDE server, notebook server, and processing workloads. Runs in private subnets within the VPC. |
@@ -117,6 +194,7 @@ The purpose of this project is to document a functional synthetic research compu
 | **Macie** | AWS sensitive data discovery service. Scans S3 buckets for exposed PHI or sensitive data. |
 | **AWS Config** | AWS compliance monitoring service. Evaluates resource configurations against rules; detects drift from security baselines. |
 | **Security Hub** | AWS aggregated security findings dashboard. Consolidates findings from GuardDuty, Macie, Config, and other sources. |
+| **Security Agent** | AWS AI-driven automated penetration testing service (preview 2025). Validates vulnerabilities through actual exploitation and provides reproducible exploit paths with remediation guidance. Under consideration for Gate G6 (system authorization) pen test requirement. |
 | **Wickr** | AWS end-to-end encrypted messaging service. Used for secure team communication within the project. HIPAA-eligible. |
 | **Lambda** | AWS serverless compute. Runs code in response to events (e.g., gatekeeper logic, upload validation). |
 | **SNS** | Simple Notification Service — AWS push notification service. Used for system alerts (upload confirmations, security events). |
@@ -365,7 +443,7 @@ stateDiagram-v2
 
 **Common Misunderstanding**: HIPAA compliance is ~80% technical engineering (encryption, firewalls, access controls).
 
-**Reality**: HIPAA compliance is ~80% organizational/social engineering and ~20% technical engineering.
+**Reality**: HIPAA compliance is ~80% people and process engineering and ~20% technical engineering.
 
 ### The HIPAA Structure
 
@@ -1121,3 +1199,7 @@ The BAA does not make AWS services automatically compliant. It means:
 - [ ] **Reproducibility / "How to Construct":** AI-guided build from this repo's documentation
 - [ ] **Synthea Docker image:** Build a Synthea CSV-export Docker image (Java 17 + Synthea + CSV-configured properties) and push to Docker Hub with discoverable tags. Eliminates the Java/Gradle/WSL installation challenges for future users. Should also include the ETL-Synthea-Python tool with pandas 2.x compatibility patches pre-applied (the upstream repo uses deprecated `DataFrame.append()` which fails on modern pandas).
 - [ ] **Validation meta-task:** The synthetic system has an "answer key" (`patient_stones.csv`) that a real research program would not have. Design a validation exercise where derived results (from analyzing PD1 PXRD/FTIR data, PD2 genomics, PD3 lab correlations) are checked against the answer key. This tests the analysis pipeline's correctness — but note that this luxury does not exist in real research. Document this distinction as a teaching point about the difference between synthetic system validation and real-world discovery.
+
+---
+
+*End of PROJECT_OVERVIEW.md — Next: ARCHITECTURE.md*

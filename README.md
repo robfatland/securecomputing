@@ -53,7 +53,18 @@ sudo apt install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
   libpango-1.0-0 libcairo2 libasound2
 ```
 
-**5. Lua filter for emoji**
+**5. Puppeteer Chrome path**
+
+If `mermaid-filter` reports "Could not find Chromium", the bundled puppeteer can't locate
+the installed Chrome binary. Fix by pointing it explicitly:
+
+```bash
+export PUPPETEER_EXECUTABLE_PATH=$(find ~/.cache/puppeteer -name chrome -type f | head -1)
+```
+
+Add to `~/.bashrc` for persistence.
+
+**6. Lua filter for emoji**
 
 The file `strip-emoji.lua` (in this repo) replaces emoji characters ([i], [x], [ ], [~], [!])
 with text equivalents before XeLaTeX processes them. No emoji font installation is needed.

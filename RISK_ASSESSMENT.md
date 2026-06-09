@@ -223,3 +223,7 @@ I, Dr. D.R. Smith, as project sponsor and designated Security Officer, have revi
 | Team change (onboarding/offboarding) | Review TA-3 scenarios; verify access controls |
 | Infrastructure change | Review TA-5 scenarios; verify new resources are covered |
 | New AI service or tool introduced | Review TA-2 scenarios; update AI-specific risks |
+
+---
+
+*End of RISK_ASSESSMENT.md — Next: POLICY_AI_ACCEPTABLE_USE.md*

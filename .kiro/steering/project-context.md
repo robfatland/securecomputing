@@ -58,3 +58,7 @@ aws s3 sync s3://securecomputing-persistent-data/ ~/securecomputing-data/
 ```
 
 No Synthea, Java, or Athena vocabularies needed on additional machines.
+
+## Writing Guidelines
+
+- **Acronym and jargon vigilance:** Always watch for undefined acronyms, abbreviations, and domain-specific jargon in code output, documentation, and conversation. When detected, suggest a definition or expansion — either inline (on first use) or as a glossary entry — so that non-experts can follow the material without external references.
