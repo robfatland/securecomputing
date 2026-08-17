@@ -1181,17 +1181,17 @@ The BAA does not make AWS services automatically compliant. It means:
 - [ ] **Additional failure scenarios:** Attempt S3 access from unauthorized role; attempt to disable CloudTrail; attempt to access audit bucket from production role; attempt outbound connection to blocked service. Verify each is denied and logged.
 
 ### Future Items
-- [ ] Phase 2 IaC skeleton (Terraform/CloudFormation)
-- [ ] Synthetic PHI data generation strategy (10,000 patients)
+- [x] Phase 2 IaC skeleton (Terraform/CloudFormation) → CDK stacks implemented and verified [x]
+- [x] Synthetic PHI data generation strategy (10,000 patients) → 11,272 patients generated (PD0–PD3) [x]
 - [ ] Decommission procedures (KMS key deletion, S3 purge)
 - [ ] HIPAA training vendor procurement
-- [ ] GitHub repo structure design
+- [x] GitHub repo structure design → `securecomputing` + `securecomputing-datagen` repos established [x]
 - [ ] Container CI/CD pipeline (GitHub Actions → ECR → ECS)
 - [ ] Verify Kiro AI backend and BAA coverage
 - [ ] Agent audit layer design
 - [ ] Agent IAM role scoping
 - [ ] **IaC: Zero-console infrastructure build** (OpenTofu/Terraform) → `ARCHITECTURE.md`
-- [ ] **Synthetic PHI isolation** (separate repo; dogfood upload path)
+- [x] **Synthetic PHI isolation** (separate repo; dogfood upload path) → `securecomputing-datagen` is isolated from analysis environment [x]
 - [ ] **End-to-end Docker container pipeline demo:** Fully functional proof-of-concept. `Dockerfile` + `app.py` + `requirements.txt` in `securecomputing-datagen` → GitHub Actions builds image → pushes to ECR → ECS/Fargate runs container in the project environment. Demonstrates full CI/CD path from code to running container within the compliant infrastructure.
 - [ ] **SageMaker lifecycle configuration:** Build the shell script (in `securecomputing` repo) that installs project libraries (NetworkX, pandas, scikit-learn, etc.) at notebook instance creation. Store in repo, reference in CDK stack. Test that a fresh SageMaker instance comes up with the full research environment ready.
 - [ ] **Book assembly:** Evaluate tooling for stapling project Markdown files into a single document (PDF or HTML book). See note in PO.md.

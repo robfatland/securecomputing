@@ -32,10 +32,10 @@ Two repositories + one data folder:
 - `destroy_mode=True` in CDK — development default; no retention, cheap instances
 - PI name: Dr. D.R. Smith; institutions: UW (university), FH (collaborator healthcare facility)
 
-## Current Status (as of June 2026)
+## Current Status (as of July 2026)
 
 - Documentation: ~95% complete
-- Data generation (Track A): Complete — all generators working, 25,932 files produced
+- Data generation (Track A): Complete — all generators working, 25,932 files produced, oxalate correlation verified
 - Infrastructure (Track B): CDK code written, deployed and verified, DESTROY tested (blank slate confirmed May 2026)
 - Analysis (Track C): ~5% — one example notebook exists; no Docker pipeline or gatekeeper Lambda yet
 - AWS infrastructure is currently DESTROYED (not running)

@@ -87,28 +87,20 @@ The Step 4 box plots show the distribution of six key urine/serum chemistry valu
 
 ---
 
-## To-Do: Data Generation Fixes
+## Data Generation Fixes (Resolved)
 
-### Fix urine oxalate correlation in PD3 (priority: high)
+### ~~Fix urine oxalate correlation in PD3~~ ✓ DONE (verified July 2026)
 
-**Problem:** The `urine_oxalate` lab values in PD3 show no variation by stone type. Urine oxalate should be elevated (hyperoxaluria) in COM and COD stone formers (stone types: `pure_com`, `mixed_com_cod`, and `com_calcium_phosphate`) compared to non-oxalate stone types (uric acid, struvite, cystine, brushite).
+**Resolution:** The `STONE_LAB_SHIFTS` dictionary in `securecomputing-datagen/generators/generate_pd3.py` includes oxalate shifts for COM/COD stone types. The generated data (`pd3/lab_results.csv`) confirms differentiation:
 
-**Root cause:** `securecomputing-datagen/generators/generate_pd3.py` generates urine oxalate from the same population-normal distribution regardless of stone type. The shift logic that was applied to other stone panel tests (urine calcium, urine pH, uric acid, urine cystine) was not applied to urine oxalate.
+| Group | n | Mean (mg/day) | SD |
+|-------|---|---------------|-----|
+| COM types (pure_com, mixed_com_cod, pure_cod, com_calcium_phosphate) | 46,348 | 53.7 | 15.5 |
+| Uric acid types | 4,311 | 28.0 | 8.0 |
+| No stones | 8,403 | 28.2 | 8.0 |
+| Other stones | 3,496 | 27.6 | 8.2 |
 
-**Fix required (in `securecomputing-datagen`):**
-1. Edit `generators/generate_pd3.py`
-2. Locate the section where stone panel lab values are generated (likely a dictionary of test parameters per stone type)
-3. Add an oxalate shift for oxalate-dominant stone types:
-   - `pure_com`: mean ~45 mg/day (normal is ~20–40; hyperoxaluria threshold is >40)
-   - `mixed_com_cod`: mean ~50 mg/day
-   - `com_calcium_phosphate`: mean ~38 mg/day (mild elevation)
-   - All other types: mean ~25 mg/day (normal range)
-4. Re-run: `python generators/generate_pd3.py --stones ~/securecomputing-data/pd0/patient_stones.csv --phi-mapping ~/securecomputing-data/pd0/phi_mapping.csv --output ~/securecomputing-data/pd3/lab_results.csv`
-5. Regenerate manifest: `python generators/generate_manifest.py --data-dir ~/securecomputing-data --output ~/securecomputing-data/manifest.json`
-6. Re-sync to persistent S3: `aws s3 sync ~/securecomputing-data/ s3://securecomputing-persistent-data/ --profile securecomputing`
-7. Re-run Step 4 analysis to verify the oxalate box plots now show differentiation
-
-**Verification:** After the fix, the Step 4 `urine_oxalate` box plot should show types a and b (pure_com, mixed_com_cod) with higher medians and IQRs than types d–j. The signal doesn't need to be perfectly separable (some overlap is realistic), but there should be a visible upward shift.
+COM/COD formers show ~2× normal mean urine oxalate, consistent with hyperoxaluria. Non-oxalate types cluster at the normal population mean (~28 mg/day). Fix was applied, data regenerated, and synced to S3.
 
 ### Step 6: Predictive Model
 
